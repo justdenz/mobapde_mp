@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.R;
@@ -86,7 +87,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		String recordID = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_ID;
 		String title = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_TITLE;
-		String subject = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_SUBJECT;
 		String score = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_SCOREPERCENTAGE;
 		String duration = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_DURATION;
 		String quizzesQuizID = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_ID;
@@ -95,7 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		//SELECT records.record_id, quizzes.quiz_id, quizzes.title,  records.score_percentage, records.duration
 		// FROM cas_db.records, cas_db.quizzes WHERE quizzes.quiz_id  = records.quiz_id
-		String selectAll = "SELECT " + recordID + ", "  + quizzesQuizID + ", " + title + ", " + subject + ", " + score + ", " + duration +
+		String selectAll = "SELECT " + recordID + ", "  + quizzesQuizID + ", " + title + ", " + score + ", " + duration +
 				" FROM " + Util.RECORD_TABLE_NAME + ", "+ Util.QUIZ_TABLE_NAME +
 				" WHERE " + quizzesQuizID + " = " + recordsQuizID;
 
@@ -112,13 +112,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				record.setScorePercentage(Float.parseFloat(cursor.getString(3)));
 				record.setDuration(Integer.parseInt(cursor.getString(4)));
 
-				//add contact objects to our list
+				//add record objects to our list
 				recordList.add(record);
 			}while (cursor.moveToNext());
 		}
 
 		return recordList;
 	}
+
+	public List<Flashcard> getFlashcardsByQuizID (int quizID) {
+
+		List<Flashcard> flashcardList = new ArrayList<>();
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String selectAll = "SELECT * FROM " + Util.FLASHCARD_TABLE_NAME +
+				" WHERE " + Util.QUIZ_KEY_ID + " = " + quizID;
+		Cursor cursor = db.rawQuery(selectAll, null);
+
+		//Loop through our data
+		if (cursor.moveToFirst()) {
+			do {
+				Flashcard flashcard = new Flashcard();
+				flashcard.setFlashcardID(Integer.parseInt(cursor.getString(0)));
+				flashcard.setQuestion(cursor.getString(2));
+				flashcard.setAnswer(cursor.getString(3));
+
+				//add flashcard objects to our list
+				flashcardList.add(flashcard);
+			}while (cursor.moveToNext());
+		}
+
+		return flashcardList;
+	}
+
+
 
 
 
