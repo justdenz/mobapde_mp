@@ -1,4 +1,4 @@
-package com.example.cardsagainststupidity;
+package com.example.cardsagainststupidity.Model;
 
 public class Flashcard {
 
