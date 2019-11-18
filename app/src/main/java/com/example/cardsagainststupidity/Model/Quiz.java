@@ -1,6 +1,7 @@
 package com.example.cardsagainststupidity.Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Quiz {
 
@@ -12,10 +13,20 @@ public class Quiz {
     private String subject;
     private String description;
     private ArrayList<Flashcard> deck;
-    private int isPinned;
+    private Date date_created;
+
 
     public Quiz() {
     }
+
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
+    }
+
 
     public int getQuizID() {
         return quizID;
@@ -24,7 +35,6 @@ public class Quiz {
     public void setQuizID(int quizID) {
         this.quizID = quizID;
     }
-
 
     public String getTitle() {
         return title;
@@ -56,14 +66,6 @@ public class Quiz {
 
     public void setDeck(ArrayList<Flashcard> deck) {
         this.deck = deck;
-    }
-
-    public int getIsPinned() {
-        return isPinned;
-    }
-
-    public void setIsPinned(int isPinned) {
-        this.isPinned = isPinned;
     }
 
 }

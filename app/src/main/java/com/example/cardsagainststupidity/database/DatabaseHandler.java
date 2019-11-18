@@ -12,7 +12,12 @@ import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.R;
 import com.example.cardsagainststupidity.util.Util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -26,17 +31,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 
 
-		String CREATE_QUIZ_TABLE = "CREATE TABLE " + Util.QUIZ_TABLE_NAME + "("
-				+ Util.QUIZ_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Util.QUIZ_KEY_TITLE + "TEXT,"
-				+ Util.QUIZ_KEY_SUBJECT + " TEXT," + Util.QUIZ_KEY_DESCRIPTION + "TEXT"  +")";
+		String CREATE_QUIZ_TABLE =
+				"CREATE TABLE " + Util.QUIZ_TABLE_NAME + "("
+				+ Util.QUIZ_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ Util.QUIZ_KEY_TITLE + " TEXT,"
+				+ Util.QUIZ_KEY_SUBJECT + " TEXT,"
+				+ Util.QUIZ_KEY_DESCRIPTION + " TEXT,"
+				+ Util.QUIZ_KEY_DATECREATED + " TEXT"
+				+")";
 
-		String CREATE_FLASHCARD_TABLE = "CREATE TABLE " + Util.FLASHCARD_TABLE_NAME + "("
-				+ Util.FLASHCARD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Util.QUIZ_KEY_ID + "INTEGER,"
-				+ Util.FLASHCARD_KEY_QUESTION + " TEXT," + Util.FLASHCARD_KEY_ANSWER + "TEXT"  + ")";
+		String CREATE_FLASHCARD_TABLE =
+				"CREATE TABLE " + Util.FLASHCARD_TABLE_NAME + "("
+				+ Util.FLASHCARD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ Util.QUIZ_KEY_ID + " INTEGER,"
+				+ Util.FLASHCARD_KEY_QUESTION + " TEXT,"
+				+ Util.FLASHCARD_KEY_ANSWER + " TEXT"
+				+ ")";
 
-		String CREATE_RECORD_TABLE = "CREATE TABLE " + Util.RECORD_TABLE_NAME + "("
-				+ Util.RECORD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Util.QUIZ_KEY_ID + "INTEGER,"
-				+ Util.RECORD_KEY_SCOREPERCENTAGE + "REAL," + Util.RECORD_KEY_DURATION + "TEXT"  + ")";
+		String CREATE_RECORD_TABLE =
+				"CREATE TABLE " + Util.RECORD_TABLE_NAME + "("
+				+ Util.RECORD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ Util.QUIZ_KEY_ID + " INTEGER,"
+				+ Util.RECORD_KEY_SCOREPERCENTAGE + " REAL,"
+				+ Util.RECORD_KEY_DURATION + " TEXT"
+				+ ")";
 
 		db.execSQL(CREATE_QUIZ_TABLE);
 		db.execSQL(CREATE_FLASHCARD_TABLE);
@@ -72,6 +90,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				quiz.setTitle(cursor.getString(1));
 				quiz.setSubject(cursor.getString(2));
 				quiz.setDescription(cursor.getString(3));
+				quiz.setDate_created(convertStringToDate(cursor.getString(4)));
+
 
 				//add contact objects to our list
 				quizList.add(quiz);
@@ -137,6 +157,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			quiz.setTitle(cursor.getString(1));
 			quiz.setSubject(cursor.getString(2));
 			quiz.setDescription(cursor.getString(3));
+			quiz.setDate_created(convertStringToDate(cursor.getString(4)));
 			quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quizID));
 		}
 
@@ -168,6 +189,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(Util.QUIZ_KEY_TITLE, q.getTitle());
 		values.put(Util.QUIZ_KEY_SUBJECT, q.getSubject());
 		values.put(Util.QUIZ_KEY_DESCRIPTION, q.getDescription());
+		values.put(Util.QUIZ_KEY_DATECREATED, getDateToString());
 
 		// Insert to row
 		db.insert(Util.QUIZ_TABLE_NAME,  null, values);
@@ -176,6 +198,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		db.close();
 	}
+
 
 
 	//Delete single quiz
@@ -271,6 +294,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return flashcardList;
 	}
+
+	private Date convertStringToDate (String d) {
+
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").parse(d);
+			return date;
+		} catch (ParseException e) {
+			e.printStackTrace();
+
+		}
+
+		return null;
+	}
+
+	private String getDateToString() {
+
+		Date date = Calendar.getInstance().getTime();
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+
+		return dateFormat.format(date);
+	}
+
+
 
 
 

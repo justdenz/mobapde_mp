@@ -19,6 +19,7 @@ public class Util {
 	public static final String QUIZ_KEY_TITLE = "title";
 	public static final String QUIZ_KEY_SUBJECT = "subject";
 	public static final String QUIZ_KEY_DESCRIPTION = "description";
+	public static final String QUIZ_KEY_DATECREATED = "date_created";
 
 	public static final String RECORD_TABLE_NAME = "records";
 	public static final String RECORD_KEY_ID = "record_id";
