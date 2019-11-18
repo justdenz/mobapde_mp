@@ -1,5 +1,7 @@
 package com.example.cardsagainststupidity;
 
+import com.example.cardsagainststupidity.Model.QuizRecord;
+
 import java.util.ArrayList;
 
 public class UserStatsHelper {
