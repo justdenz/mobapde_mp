@@ -4,20 +4,32 @@ import java.util.ArrayList;
 
 public class Quiz {
 
+
+
+
+    private int quizID;
     private String title;
     private String subject;
     private String description;
     private ArrayList<Flashcard> deck;
 
     public Quiz() {
-
     }
 
-    public Quiz (String t, String s, String d, ArrayList<Flashcard> deck) {
+    public Quiz (int id, String t, String s, String d) {
+        quizID = id;
         title = t;
         subject = s;
         description = d;
         this.deck = deck;
+    }
+
+    public int getQuizID() {
+        return quizID;
+    }
+
+    public void setQuizID(int quizID) {
+        this.quizID = quizID;
     }
 
     public String getTitle() {

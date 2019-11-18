@@ -1,11 +1,17 @@
 package com.example.cardsagainststupidity.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.cardsagainststupidity.Model.Quiz;
+import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.R;
 import com.example.cardsagainststupidity.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -46,7 +52,81 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	
+
+	public List<Quiz> getAllQuizzes () {
+
+		List<Quiz> quizList = new ArrayList<>();
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String selectAll = "SELECT * FROM " + Util.QUIZ_TABLE_NAME;
+		Cursor cursor = db.rawQuery(selectAll, null);
+
+		//Loop through our data
+		if (cursor.moveToFirst()) {
+			do {
+				Quiz quiz = new Quiz();
+				quiz.setQuizID(Integer.parseInt(cursor.getString(0)));
+				quiz.setTitle(cursor.getString(1));
+				quiz.setSubject(cursor.getString(2));
+				quiz.setDescription(cursor.getString(3));
+
+				//add contact objects to our list
+				quizList.add(quiz);
+			}while (cursor.moveToNext());
+		}
+
+		return quizList;
+	}
+
+	public List<QuizRecord> getAllRecords () {
+		List<QuizRecord> recordList = new ArrayList<>();
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String recordID = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_ID;
+		String title = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_TITLE;
+		String subject = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_SUBJECT;
+		String score = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_SCOREPERCENTAGE;
+		String duration = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_DURATION;
+		String quizzesQuizID = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_ID;
+		String recordsQuizID = Util.RECORD_TABLE_NAME + "." + Util.QUIZ_KEY_ID;
+
+
+		//SELECT records.record_id, quizzes.quiz_id, quizzes.title,  records.score_percentage, records.duration
+		// FROM cas_db.records, cas_db.quizzes WHERE quizzes.quiz_id  = records.quiz_id
+		String selectAll = "SELECT " + recordID + ", "  + quizzesQuizID + ", " + title + ", " + subject + ", " + score + ", " + duration +
+				" FROM " + Util.RECORD_TABLE_NAME + ", "+ Util.QUIZ_TABLE_NAME +
+				" WHERE " + quizzesQuizID + " = " + recordsQuizID;
+
+		Cursor cursor = db.rawQuery(selectAll, null);
+
+		//Loop through our data
+		if (cursor.moveToFirst()) {
+			do {
+				QuizRecord record = new QuizRecord();
+
+				record.setRecordID(Integer.parseInt(cursor.getString(0)));
+				record.setQuizID(Integer.parseInt(cursor.getString(1)));
+				record.setQuizTitle(cursor.getString(2));
+				record.setScorePercentage(Float.parseFloat(cursor.getString(3)));
+				record.setDuration(Integer.parseInt(cursor.getString(4)));
+
+				//add contact objects to our list
+				recordList.add(record);
+			}while (cursor.moveToNext());
+		}
+
+		return recordList;
+	}
+
+
+
+
+
+
+
+
 
 
 
