@@ -227,6 +227,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	public List<Quiz> getQuizByKeyword (String keyword) {
+
+		List<Quiz> quizList = new ArrayList<>();
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String likeTitle = Util.QUIZ_KEY_TITLE + " = %" + keyword + "%";
+		String likeSubject = Util.QUIZ_KEY_SUBJECT + " = %" + keyword + "%";
+		String likeDescription = Util.QUIZ_KEY_DESCRIPTION + " = %" + keyword + "%";
+
+		String selectAll = "SELECT * FROM " + Util.QUIZ_TABLE_NAME +
+				" WHERE " + likeTitle + " OR " + likeSubject + " OR " + likeDescription;
+		Cursor cursor = db.rawQuery(selectAll, null);
+
+		//Loop through our data
+		if (cursor.moveToFirst()) {
+			do {
+				Quiz quiz = new Quiz();
+				quiz.setQuizID(Integer.parseInt(cursor.getString(0)));
+				quiz.setTitle(cursor.getString(1));
+				quiz.setSubject(cursor.getString(2));
+				quiz.setDescription(cursor.getString(3));
+				quiz.setDate_created(convertStringToDate(cursor.getString(4)));
+
+				//add contact objects to our list
+				quizList.add(quiz);
+			}while (cursor.moveToNext());
+		}
+
+		return quizList;
+	}
+
 	private void addFlashcards (ArrayList<Flashcard> deck, int quizID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
