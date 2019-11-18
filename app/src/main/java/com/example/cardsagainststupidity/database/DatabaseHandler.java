@@ -141,7 +141,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 
 		return quiz;
-
 	}
 
 	public int updateQuiz(Quiz q) {
@@ -188,7 +187,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		db.close();
 
-		deleteFlashcardsInQuiz(quizID);
+		deleteFlashcards(quizID);
+	}
+
+	public void addRecord (QuizRecord r) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(Util.QUIZ_KEY_ID, r.getQuiz().getQuizID());
+		values.put(Util.RECORD_KEY_SCOREPERCENTAGE, r.getScorePercentage());
+		values.put(Util.RECORD_KEY_DURATION, r.getDuration());
+
+		// Insert to row
+		db.insert(Util.RECORD_TABLE_NAME,  null, values);
+
+		db.close();
 	}
 
 	private void addFlashcards (ArrayList<Flashcard> deck, int quizID) {
@@ -225,7 +238,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 	}
 
-	private void deleteFlashcardsInQuiz (int quizID) {
+	private void deleteFlashcards (int quizID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		db.delete(Util.RECORD_TABLE_NAME, Util.QUIZ_KEY_ID + "=?",
