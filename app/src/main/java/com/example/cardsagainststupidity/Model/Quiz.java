@@ -12,16 +12,9 @@ public class Quiz {
     private String subject;
     private String description;
     private ArrayList<Flashcard> deck;
+    private int isPinned;
 
     public Quiz() {
-    }
-
-    public Quiz (int id, String t, String s, String d) {
-        quizID = id;
-        title = t;
-        subject = s;
-        description = d;
-        this.deck = deck;
     }
 
     public int getQuizID() {
@@ -31,6 +24,7 @@ public class Quiz {
     public void setQuizID(int quizID) {
         this.quizID = quizID;
     }
+
 
     public String getTitle() {
         return title;
@@ -62,6 +56,14 @@ public class Quiz {
 
     public void setDeck(ArrayList<Flashcard> deck) {
         this.deck = deck;
+    }
+
+    public int getIsPinned() {
+        return isPinned;
+    }
+
+    public void setIsPinned(int isPinned) {
+        this.isPinned = isPinned;
     }
 
 }

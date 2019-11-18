@@ -12,11 +12,6 @@ public class Flashcard {
 
     }
 
-    public Flashcard (String q, String a) {
-        question = q;
-        answer = a;
-    }
-
     public int getFlashcardID() {
         return flashcardID;
     }

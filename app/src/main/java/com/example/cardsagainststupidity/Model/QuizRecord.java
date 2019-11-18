@@ -11,13 +11,6 @@ public class QuizRecord {
 		quiz = new Quiz();
 	}
 
-	public QuizRecord (Quiz quiz, float s, int d) {
-		this.quiz = quiz;
-		this.scorePercentage = s;
-		this.duration = d;
-		quiz = new Quiz();
-	}
-
 	public int getRecordID() {
 		return recordID;
 	}

@@ -1,5 +1,6 @@
 package com.example.cardsagainststupidity.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,16 +27,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 		String CREATE_QUIZ_TABLE = "CREATE TABLE " + Util.QUIZ_TABLE_NAME + "("
-				+ Util.QUIZ_KEY_ID + " INTEGER PRIMARY KEY," + Util.QUIZ_KEY_TITLE + "TEXT,"
-				+ Util.QUIZ_KEY_SUBJECT + " TEXT" + Util.QUIZ_KEY_DESCRIPTION + "TEXT"  + ")";
+				+ Util.QUIZ_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Util.QUIZ_KEY_TITLE + "TEXT,"
+				+ Util.QUIZ_KEY_SUBJECT + " TEXT," + Util.QUIZ_KEY_DESCRIPTION + "TEXT"  +")";
 
 		String CREATE_FLASHCARD_TABLE = "CREATE TABLE " + Util.FLASHCARD_TABLE_NAME + "("
-				+ Util.FLASHCARD_KEY_ID + " INTEGER PRIMARY KEY," + Util.QUIZ_KEY_ID + "INTEGER,"
-				+ Util.FLASHCARD_KEY_QUESTION + " TEXT" + Util.FLASHCARD_KEY_ANSWER + "TEXT"  + ")";
+				+ Util.FLASHCARD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Util.QUIZ_KEY_ID + "INTEGER,"
+				+ Util.FLASHCARD_KEY_QUESTION + " TEXT," + Util.FLASHCARD_KEY_ANSWER + "TEXT"  + ")";
 
 		String CREATE_RECORD_TABLE = "CREATE TABLE " + Util.RECORD_TABLE_NAME + "("
-				+ Util.RECORD_KEY_ID + " INTEGER PRIMARY KEY," + Util.QUIZ_KEY_ID + "INTEGER,"
-				+ Util.RECORD_KEY_SCOREPERCENTAGE + "REAL" + Util.RECORD_KEY_DURATION + "TEXT"  + ")";
+				+ Util.RECORD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Util.QUIZ_KEY_ID + "INTEGER,"
+				+ Util.RECORD_KEY_SCOREPERCENTAGE + "REAL," + Util.RECORD_KEY_DURATION + "TEXT"  + ")";
 
 		db.execSQL(CREATE_QUIZ_TABLE);
 		db.execSQL(CREATE_FLASHCARD_TABLE);
@@ -120,6 +121,119 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return recordList;
 	}
 
+
+
+	public Quiz getQuiz (int quizID) {
+		Quiz quiz = new Quiz();
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String selectQuiz = "SELECT * FROM " + Util.QUIZ_TABLE_NAME + " WHERE " + Util.QUIZ_KEY_ID + " = ?";
+
+		Cursor cursor = db.rawQuery(selectQuiz, new String[] {String.valueOf(quizID)});
+
+		if (cursor.moveToFirst()) {
+			quiz.setQuizID(Integer.parseInt(cursor.getString(0)));
+			quiz.setTitle(cursor.getString(1));
+			quiz.setSubject(cursor.getString(2));
+			quiz.setDescription(cursor.getString(3));
+			quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quizID));
+		}
+
+		return quiz;
+
+	}
+
+	public int updateQuiz(Quiz q) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+
+		values.put(Util.QUIZ_KEY_TITLE, q.getTitle());
+		values.put(Util.QUIZ_KEY_SUBJECT, q.getSubject());
+		values.put(Util.QUIZ_KEY_DESCRIPTION, q.getDescription());
+
+		updateFlashcards(q.getDeck(), q.getQuizID());
+
+		//update the row
+		//update(tablename, values, where id = 43)
+		return db.update(Util.QUIZ_TABLE_NAME, values, Util.QUIZ_KEY_ID + "= ?",
+				new String[]{String.valueOf(q.getQuizID())});
+	}
+
+	public void addQuiz(Quiz q){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(Util.QUIZ_KEY_TITLE, q.getTitle());
+		values.put(Util.QUIZ_KEY_SUBJECT, q.getSubject());
+		values.put(Util.QUIZ_KEY_DESCRIPTION, q.getDescription());
+
+		// Insert to row
+		db.insert(Util.QUIZ_TABLE_NAME,  null, values);
+
+		addFlashcards(q.getDeck(), q.getQuizID());
+
+		db.close();
+	}
+
+
+	//Delete single quiz
+	public void deleteQuiz(int quizID) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		db.delete(Util.QUIZ_TABLE_NAME, Util.QUIZ_KEY_ID + "=?",
+				new String[]{String.valueOf(quizID)});
+
+		db.close();
+
+		deleteFlashcardsInQuiz(quizID);
+	}
+
+	private void addFlashcards (ArrayList<Flashcard> deck, int quizID) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		for (Flashcard d : deck) {
+			ContentValues values = new ContentValues();
+			values.put(Util.QUIZ_KEY_ID, quizID);
+			values.put(Util.FLASHCARD_KEY_QUESTION, d.getQuestion());
+			values.put(Util.FLASHCARD_KEY_ANSWER, d.getAnswer());
+			// Insert to row
+			db.insert(Util.FLASHCARD_TABLE_NAME,  null, values);
+		}
+
+		db.close();
+	}
+
+
+
+	private void updateFlashcards(ArrayList<Flashcard> deck, int quizID) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		for (Flashcard f : deck) {
+			ContentValues values = new ContentValues();
+
+			values.put(Util.QUIZ_KEY_ID, quizID);
+			values.put(Util.FLASHCARD_KEY_QUESTION, f.getQuestion());
+			values.put(Util.FLASHCARD_KEY_ANSWER, f.getAnswer());
+
+
+			db.update(Util.FLASHCARD_TABLE_NAME, values, Util.FLASHCARD_KEY_ID + "= ?",
+					new String[]{String.valueOf(f.getFlashcardID())});
+		}
+	}
+
+	private void deleteFlashcardsInQuiz (int quizID) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		db.delete(Util.RECORD_TABLE_NAME, Util.QUIZ_KEY_ID + "=?",
+				new String[]{String.valueOf(quizID)});
+
+		db.close();
+	}
+
 	private List<Flashcard> getFlashcardsByQuizID (int quizID) {
 
 		List<Flashcard> flashcardList = new ArrayList<>();
@@ -127,7 +241,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		String selectAll = "SELECT * FROM " + Util.FLASHCARD_TABLE_NAME +
 				" WHERE " + Util.QUIZ_KEY_ID + " = ?";
-		Cursor cursor = db.rawQuery(selectAll, new String[] {quizID + ""});
+		Cursor cursor = db.rawQuery(selectAll, new String[] {String.valueOf(quizID)});
 
 		//Loop through our data
 		if (cursor.moveToFirst()) {
@@ -145,26 +259,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return flashcardList;
 	}
 
-	public Quiz getQuiz (int quizID) {
-		Quiz quiz = new Quiz();
 
-		SQLiteDatabase db = this.getReadableDatabase();
 
-		String selectQuiz = "SELECT * FROM " + Util.QUIZ_TABLE_NAME + " WHERE " + Util.QUIZ_KEY_ID + " = ?";
 
-		Cursor cursor = db.rawQuery(selectQuiz, new String[] {quizID + ""});
-
-		if (cursor.moveToFirst()) {
-			quiz.setQuizID(Integer.parseInt(cursor.getString(0)));
-			quiz.setTitle(cursor.getString(1));
-			quiz.setSubject(cursor.getString(2));
-			quiz.setDescription(cursor.getString(3));
-			quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quizID));
-		}
-
-		return quiz;
-
-	}
 
 
 
