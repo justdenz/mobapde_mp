@@ -120,14 +120,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return recordList;
 	}
 
-	public List<Flashcard> getFlashcardsByQuizID (int quizID) {
+	private List<Flashcard> getFlashcardsByQuizID (int quizID) {
 
 		List<Flashcard> flashcardList = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		String selectAll = "SELECT * FROM " + Util.FLASHCARD_TABLE_NAME +
-				" WHERE " + Util.QUIZ_KEY_ID + " = " + quizID;
-		Cursor cursor = db.rawQuery(selectAll, null);
+				" WHERE " + Util.QUIZ_KEY_ID + " = ?";
+		Cursor cursor = db.rawQuery(selectAll, new String[] {quizID + ""});
 
 		//Loop through our data
 		if (cursor.moveToFirst()) {
@@ -144,6 +144,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return flashcardList;
 	}
+
+	public Quiz getQuiz (int quizID) {
+		Quiz quiz = new Quiz();
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String selectQuiz = "SELECT * FROM " + Util.QUIZ_TABLE_NAME + " WHERE " + Util.QUIZ_KEY_ID + " = ?";
+
+		Cursor cursor = db.rawQuery(selectQuiz, new String[] {quizID + ""});
+
+		if (cursor.moveToFirst()) {
+			quiz.setQuizID(Integer.parseInt(cursor.getString(0)));
+			quiz.setTitle(cursor.getString(1));
+			quiz.setSubject(cursor.getString(2));
+			quiz.setDescription(cursor.getString(3));
+			quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quizID));
+		}
+
+		return quiz;
+
+	}
+
 
 
 
