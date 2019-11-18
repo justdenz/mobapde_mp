@@ -1,18 +1,18 @@
-package com.example.cardsagainststupidity;
+package com.example.cardsagainststupidity.Model;
 
 import com.example.cardsagainststupidity.Model.QuizRecord;
 
 import java.util.ArrayList;
 
-public class UserStatsHelper {
+public class Statistics {
 
 	private ArrayList<QuizRecord> history;
 
-	public UserStatsHelper() {
+	public Statistics() {
 
 	}
 
-	public UserStatsHelper(ArrayList<QuizRecord> history) {
+	public Statistics(ArrayList<QuizRecord> history) {
 		this.history = history;
 	}
 

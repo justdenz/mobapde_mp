@@ -2,7 +2,7 @@ package com.example.cardsagainststupidity.Model;
 
 public class QuizRecord {
 
-	private int quizID;
+	private Quiz quiz;
 	private float scorePercentage;
 	private int duration;
 
@@ -10,18 +10,18 @@ public class QuizRecord {
 
 	}
 
-	public QuizRecord (int id, float s, int d) {
-		this.quizID = id;
+	public QuizRecord (Quiz quiz, float s, int d) {
+		this.quiz = quiz;
 		this.scorePercentage = s;
 		this.duration = d;
 	}
 
-	public int getQuizID() {
-		return quizID;
+	public Quiz getQuiz() {
+		return quiz;
 	}
 
-	public void setQuizID(int quizID) {
-		this.quizID = quizID;
+	public void setQuiz(Quiz quiz) {
+		this.quiz = quiz;
 	}
 
 	public float getScorePercentage() {

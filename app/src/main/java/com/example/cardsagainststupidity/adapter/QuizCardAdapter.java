@@ -1,16 +1,15 @@
-package com.example.cardsagainststupidity;
+package com.example.cardsagainststupidity.adapter;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cardsagainststupidity.R;
 
 public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> {
 

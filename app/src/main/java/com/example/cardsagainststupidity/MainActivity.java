@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
