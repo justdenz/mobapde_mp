@@ -14,8 +14,8 @@ public class Statistics {
 
 	}
 
-	public Statistics(List<QuizRecord> history) {
-		this.history = (ArrayList<QuizRecord>) history;
+	public Statistics(ArrayList<QuizRecord> history) {
+		this.history =  history;
 	}
 
 	public ArrayList<QuizRecord> getHistory() {
