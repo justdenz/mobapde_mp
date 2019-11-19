@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-        <activity android:name=".TakeQuizIntro"></activity>
+        <activity android:name=".StatsActivity"></activity>
+        <activity android:name=".TakeQuizIntro" />
         <activity android:name=".CreateQuizCardsFragment" />
         <activity android:name=".CreateQuizInfoFragment" />
         <activity android:name=".CreateQuizActivity">
