@@ -61,20 +61,6 @@
             android:text="by author"
             android:textSize="17sp"></TextView>
 
-        <Button
-            android:id="@+id/pinQuizBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/quizFlashCardQuantity"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="207dp"
-            android:layout_marginBottom="55dp"
-            android:background="@drawable/rounded_white_button"
-            android:padding="5dp"
-            android:text="Pin Quiz"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="14sp"></Button>
 
         <Button
             android:id="@+id/takeQuizBtn"

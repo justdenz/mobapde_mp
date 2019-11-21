@@ -5,20 +5,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.R;
+
+import java.util.ArrayList;
 
 public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> {
 
     private static final String TAG = "QuizCardAdapter";
 
     private Context context;
+    private ArrayList<Quiz> quizzes;
 
-    public QuizCardAdapter(Context context) {
+    public QuizCardAdapter(Context context, ArrayList<Quiz> quizzes) {
         this.context = context;
+        this.quizzes = quizzes;
     }
 
     @NonNull
@@ -36,25 +44,24 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 3;
+        return quizzes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-//        TextView quizTitle, quizSubject, quizDescription, quizFlashCardQuantity, quizAuthor;
-//        CardView quizCard;
-//        Button takeQuizBtn, pinQuizBtn;
+        TextView quizTitle, quizSubject, quizDescription, quizFlashCardQuantity, quizAuthor;
+        CardView quizCard;
+        Button takeQuizBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            quizTitle = itemView.findViewById(R.id.quizTitle);
-//            quizSubject = itemView.findViewById(R.id.quizSubject);
-//            quizDescription = itemView.findViewById(R.id.quizDescription);
-//            quizFlashCardQuantity = itemView.findViewById(R.id.quizFlashCardQuantity);
-//            quizAuthor = itemView.findViewById(R.id.quizAuthor);
-//            quizCard = itemView.findViewById(R.id.quizCard);
-//            takeQuizBtn = itemView.findViewById(R.id.takeQuizBtn);
-//            pinQuizBtn = itemView.findViewById(R.id.pinQuizBtn);
+            quizTitle = itemView.findViewById(R.id.quizTitle);
+            quizSubject = itemView.findViewById(R.id.quizSubject);
+            quizDescription = itemView.findViewById(R.id.quizDescription);
+            quizFlashCardQuantity = itemView.findViewById(R.id.quizFlashCardQuantity);
+            quizAuthor = itemView.findViewById(R.id.quizAuthor);
+            quizCard = itemView.findViewById(R.id.quizCard);
+            takeQuizBtn = itemView.findViewById(R.id.takeQuizBtn);
         }
     }
 }

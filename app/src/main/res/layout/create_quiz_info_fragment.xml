@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateQuizInfoFragment"
+    tools:context=".fragments.CreateQuizInfoFragment"
     android:orientation="vertical">
 
     <TextView
@@ -21,8 +21,8 @@
         android:layout_height="77dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ex. MOBAPDE Test"
-        android:textColor="#70979797"
+        android:hint="Ex. MOBAPDE Test"
+        android:textColor="@android:color/black"
         android:textSize="18sp" />
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:layout_height="77dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ex. MOBAPDE"
+        android:hint="Ex. MOBAPDE"
         android:textColor="#70979797"
         android:textSize="18sp" />
 
@@ -56,9 +56,21 @@
         android:layout_height="77dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ex. A Test on MOBAPDE Terms"
+        android:hint="Ex. A Test on MOBAPDE Terms"
         android:textColor="#70979797"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/nextBtn"
+        android:background="@drawable/rounded_black_button"
+        android:textColor="@android:color/white"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:onClick="nextFragment"
+        android:layout_gravity="center"
+        android:text="Next">
+    </Button>
+
 
 
 </LinearLayout>
