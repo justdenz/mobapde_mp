@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.Model.QuizRecord;
+import com.example.cardsagainststupidity.Model.Statistics;
 import com.example.cardsagainststupidity.R;
 import com.example.cardsagainststupidity.util.Util;
 
@@ -38,7 +39,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ Util.QUIZ_KEY_SUBJECT + " TEXT,"
 				+ Util.QUIZ_KEY_DESCRIPTION + " TEXT,"
 				+ Util.QUIZ_KEY_DATECREATED + " TEXT"
-				+")";
+				+");";
 
 		String CREATE_FLASHCARD_TABLE =
 				"CREATE TABLE " + Util.FLASHCARD_TABLE_NAME + "("
@@ -46,7 +47,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ Util.QUIZ_KEY_ID + " INTEGER,"
 				+ Util.FLASHCARD_KEY_QUESTION + " TEXT,"
 				+ Util.FLASHCARD_KEY_ANSWER + " TEXT"
-				+ ")";
+				+ ");";
 
 		String CREATE_RECORD_TABLE =
 				"CREATE TABLE " + Util.RECORD_TABLE_NAME + "("
@@ -54,7 +55,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ Util.QUIZ_KEY_ID + " INTEGER,"
 				+ Util.RECORD_KEY_SCOREPERCENTAGE + " REAL,"
 				+ Util.RECORD_KEY_DURATION + " TEXT"
-				+ ")";
+				+ ");";
 
 		db.execSQL(CREATE_QUIZ_TABLE);
 		db.execSQL(CREATE_FLASHCARD_TABLE);
@@ -101,8 +102,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return quizList;
 	}
 
-	public List<QuizRecord> getAllRecords () {
-		List<QuizRecord> recordList = new ArrayList<>();
+	public Statistics getStatistics () {
+
+
+
+		ArrayList<QuizRecord> recordList = new ArrayList<>();
+
 
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -138,7 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			}while (cursor.moveToNext());
 		}
 
-		return recordList;
+		return new Statistics(recordList);
 	}
 
 

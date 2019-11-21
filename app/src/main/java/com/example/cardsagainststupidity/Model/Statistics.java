@@ -3,6 +3,8 @@ package com.example.cardsagainststupidity.Model;
 import com.example.cardsagainststupidity.Model.QuizRecord;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Statistics {
 
@@ -13,7 +15,7 @@ public class Statistics {
 	}
 
 	public Statistics(ArrayList<QuizRecord> history) {
-		this.history = history;
+		this.history =  history;
 	}
 
 	public ArrayList<QuizRecord> getHistory() {
