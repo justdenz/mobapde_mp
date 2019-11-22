@@ -10,20 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.cardsagainststupidity.CreateQuizActivity;
+import com.example.cardsagainststupidity.Model.Flashcard;
+import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 
 public class CreateQuizCardsFragment extends Fragment {
 
-    private CreateQuizCardsFragmentListener listener;
-
-    EditText questionInput;
-    Button backBtn;
-
-    public interface CreateQuizCardsFragmentListener{
-        void onInputQuizCardSent(CharSequence input);
-    }
+    TextInputEditText questionInput, answerInput;
+    MaterialButton backBtn, publishBtn;
+    ArrayList<Flashcard> flashcards;
+    MaterialButton backCardBtn, nextCardBtn;
+    TextView nthFlashCard;
+    private int CURRENT_CARD = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,42 @@ public class CreateQuizCardsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.create_quiz_cards_fragment, container, false);
+
+        flashcards = new ArrayList<>();
+
+        Flashcard firstFlashCard = new Flashcard();
+        flashcards.add(firstFlashCard);
+
+        nthFlashCard = view.findViewById(R.id.nthFlashCard);
+        nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
+
+        questionInput = view.findViewById(R.id.questionInput);
+        answerInput = view.findViewById(R.id.answerInput);
+
+        //navigation for flashcards
+        backCardBtn = view.findViewById(R.id.backCardBtn);
+        backCardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goPrevCard();
+            }
+        });
+
+
+        nextCardBtn = view.findViewById(R.id.nextCardBtn);
+        nextCardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(CURRENT_CARD == flashcards.size()) {
+                    addCard();
+                }else{
+                    goNextCard();
+                }
+            }
+        });
+
+
+        //Navigations for fragments
         backBtn = view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +84,55 @@ public class CreateQuizCardsFragment extends Fragment {
                 ((CreateQuizActivity) getActivity()).goBack();
             }
         });
+
+
+        publishBtn = view.findViewById(R.id.publishBtn);
+        publishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CreateQuizActivity) getActivity()).setQuizDeck(flashcards);
+            }
+        });
         return  view;
     }
+
+    public void addCard(){
+        updateCurrentCard();
+
+        CURRENT_CARD += 1;
+
+
+        Flashcard newFlashCard = new Flashcard();
+        flashcards.add(newFlashCard);
+
+        nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
+        questionInput.getText().clear();
+        answerInput.getText().clear();
+    }
+
+    public void goNextCard(){
+        updateCurrentCard();
+        CURRENT_CARD += 1;
+        nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
+        questionInput.setText(flashcards.get(CURRENT_CARD-1).getQuestion());
+        answerInput.setText(flashcards.get(CURRENT_CARD-1).getAnswer());
+    }
+
+    public void goPrevCard(){
+        updateCurrentCard();
+        CURRENT_CARD -= 1;
+        nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
+        questionInput.setText(flashcards.get(CURRENT_CARD-1).getQuestion());
+        answerInput.setText(flashcards.get(CURRENT_CARD-1).getAnswer());
+    }
+
+    //updates the current card before doing something
+    public void updateCurrentCard(){
+        flashcards.get(CURRENT_CARD-1).setQuestion(questionInput.getText().toString());
+        flashcards.get(CURRENT_CARD-1).setAnswer(answerInput.getText().toString());
+    }
+
+
 
 
 }

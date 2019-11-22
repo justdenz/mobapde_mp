@@ -31,7 +31,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/darker_gray"
-            android:hint="Quiz Tile">
+            android:hint="Title">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titleInput"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/darker_gray"
             android:layout_marginTop="15dp"
-            android:hint="Quiz Subject">
+            android:hint="Subject">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/subjectInput"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/darker_gray"
             android:layout_marginTop="15dp"
-            android:hint="Quiz Description">
+            android:hint="Description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descriptionInput"

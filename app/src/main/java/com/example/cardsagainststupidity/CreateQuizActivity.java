@@ -11,9 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.fragments.CreateQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.CreateQuizInfoFragment;
+
+import java.util.ArrayList;
 
 public class CreateQuizActivity extends AppCompatActivity {
     private static final String TAG = "CreateQuizActivity";
@@ -69,5 +72,9 @@ public class CreateQuizActivity extends AppCompatActivity {
 //        this.newQuiz.setSubject(subject);
 //        this.newQuiz.setDescription(description);
         Log.d(TAG, title + subject + description);
+    }
+
+    public void setQuizDeck(ArrayList<Flashcard> deck){
+        this.newQuiz.setDeck(deck);
     }
 }

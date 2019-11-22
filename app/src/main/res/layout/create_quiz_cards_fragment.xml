@@ -8,17 +8,40 @@
     android:id="@+id/create_quiz_info_fragment"
     tools:context=".fragments.CreateQuizCardsFragment">
 
-    <TextView
-        android:id="@+id/flashCard"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
-        android:layout_marginLeft="40sp"
-        android:text="Flashcard 1/10"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"></TextView>
+        android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backCardBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cornerRadius="300dp"
+            android:textSize="24sp"
+            android:text="BACK"/>
+
+        <TextView
+            android:id="@+id/nthFlashCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Flashcard"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"></TextView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextCardBtn"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            app:cornerRadius="300dp"
+            android:textSize="24sp"
+            android:text="+"/>
+    </LinearLayout>
 
     <TextView
         android:layout_marginBottom="5dp"
@@ -30,25 +53,38 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"></TextView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="250dp"
         android:layout_height="150dp"
-        app:cardBackgroundColor="@android:color/black"
-        app:cardCornerRadius="10dp"
+        style="@style/Widget.MaterialComponents.CardView"
+        app:cardBackgroundColor="#000000"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:layout_gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/questionInput"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="@android:color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Place your question here..."
-            android:gravity="top"
-            android:textColorHint="#ADADAD"
-            android:textColor="#ADADAD"
-            android:background="@null"
-            android:textSize="14sp"
-            android:layout_margin="20sp"></EditText>
-    </androidx.cardview.widget.CardView>
+            android:textColorHint="@color/colorGray"
+            android:hint="Place the answer here...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/questionInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@null"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:layout_marginBottom="5dp"
@@ -61,42 +97,60 @@
         android:textSize="20sp"
         android:textStyle="bold"></TextView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true">
+        style="@style/Widget.MaterialComponents.CardView"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:layout_gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/answerInput"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20sp"
-            android:background="@android:color/white"
-            android:gravity="top"
-            android:hint="Place your answer here..."
-            android:textColor="#ADADAD"
-            android:textSize="14sp"></EditText>
-    </androidx.cardview.widget.CardView>
+            android:textColorHint="@android:color/darker_gray"
+            android:hint="Place the answer here...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/answerInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:background="@null"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
-        <Button
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"></Button>
-        <Button
-            android:id="@+id/finishBtn"
+            android:layout_marginRight="30dp"
+            android:text="Back"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/publishBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Finish"></Button>
+            android:text="Publish Quiz!"/>
+
+
+
     </LinearLayout>
 
 </LinearLayout>
