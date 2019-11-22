@@ -42,11 +42,9 @@ public class CreateQuizInfoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.create_quiz_info_fragment, container, false);
-
-        titleInput = view.findViewById(R.id.titleInput);
-        subjectInput = view.findViewById(R.id.subjectInput);
-        descriptionInput = view.findViewById(R.id.descriptionInput);
-
+//        titleInput = view.findViewById(R.id.titleInput);
+//        subjectInput = view.findViewById(R.id.subjectInput);
+//        descriptionInput = view.findViewById(R.id.descriptionInput);
         nextBtn = view.findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
