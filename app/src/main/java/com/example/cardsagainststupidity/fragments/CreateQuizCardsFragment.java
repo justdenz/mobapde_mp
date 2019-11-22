@@ -91,6 +91,7 @@ public class CreateQuizCardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((CreateQuizActivity) getActivity()).setQuizDeck(flashcards);
+                ((CreateQuizActivity) getActivity()).finish();
             }
         });
         return  view;
