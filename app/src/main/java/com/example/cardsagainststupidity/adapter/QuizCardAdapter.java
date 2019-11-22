@@ -43,7 +43,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         holder.setHolderQuizID(quizzes.get(position).getQuizID());
         holder.titleTxtView.setText(quizzes.get(position).getTitle());
         holder.subjectTxtView.setText(quizzes.get(position).getSubject());
-        holder.nFlashcardsTxtView.setText(quizzes.get(position).getDeck().size());
+        holder.nFlashcardsTxtView.setText("5");
     }
 
     @Override

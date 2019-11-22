@@ -17,11 +17,12 @@ import android.widget.EditText;
 
 import com.example.cardsagainststupidity.CreateQuizActivity;
 import com.example.cardsagainststupidity.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class CreateQuizInfoFragment extends Fragment {
 
     private static final String TAG = "CreateQuizInfoFragment";
-    private EditText titleInput, subjectInput, descriptionInput;
+    private TextInputEditText titleInput, subjectInput, descriptionInput;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -42,15 +43,15 @@ public class CreateQuizInfoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.create_quiz_info_fragment, container, false);
-//        titleInput = view.findViewById(R.id.titleInput);
-//        subjectInput = view.findViewById(R.id.subjectInput);
-//        descriptionInput = view.findViewById(R.id.descriptionInput);
+        titleInput = view.findViewById(R.id.titleInput);
+        subjectInput = view.findViewById(R.id.subjectInput);
+        descriptionInput = view.findViewById(R.id.descriptionInput);
         nextBtn = view.findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CreateQuizActivity) getActivity()).goNext();
                 ((CreateQuizActivity) getActivity()).setQuizInfo(titleInput.getText().toString(), subjectInput.getText().toString(), descriptionInput.getText().toString());
+                ((CreateQuizActivity) getActivity()).goNext();
             }
         });
 

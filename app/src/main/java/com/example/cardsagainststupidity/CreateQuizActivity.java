@@ -31,40 +31,26 @@ public class CreateQuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_quiz);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame_container, new CreateQuizCardsFragment(), "CREATE_QUIZ_CARD");
+//        fragmentTransaction.add(R.id.frame_container, new CreateQuizCardsFragment(), "CREATE_QUIZ_CARD");
         fragmentTransaction.add(R.id.frame_container, new CreateQuizInfoFragment(), "CREATE_QUIZ_INFO");
         fragmentTransaction.commit();
     }
 
-
-    public void goNext(View view) {
-        createQuizCardsFragment = (CreateQuizCardsFragment) getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_CARD");
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_INFO"));
-        fragmentTransaction.attach(createQuizCardsFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commitAllowingStateLoss();
-        getSupportFragmentManager().executePendingTransactions();
-    }
-
-    public void goBack(View view) {
-        createQuizInfoFragment = (CreateQuizInfoFragment) getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_INFO");
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_CARD"));
-        fragmentTransaction.attach(createQuizInfoFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commitAllowingStateLoss();
-        getSupportFragmentManager().executePendingTransactions();
-    }
-
     public void goNext() {
-        createQuizCardsFragment = (CreateQuizCardsFragment) getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_CARD");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_INFO"));
-        fragmentTransaction.attach(createQuizCardsFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commitAllowingStateLoss();
-        getSupportFragmentManager().executePendingTransactions();
+
+        if(getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_CARD") == null) {
+            fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_INFO"));
+            fragmentTransaction.add(R.id.frame_container, new CreateQuizCardsFragment(), "CREATE_QUIZ_CARD");
+            fragmentTransaction.commit();
+        } else{
+            createQuizCardsFragment = (CreateQuizCardsFragment) getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_CARD");
+            fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("CREATE_QUIZ_INFO"));
+            fragmentTransaction.attach(createQuizCardsFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
+            getSupportFragmentManager().executePendingTransactions();
+        }
     }
 
     public void goBack(){
