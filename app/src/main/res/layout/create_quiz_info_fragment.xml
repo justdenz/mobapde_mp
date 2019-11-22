@@ -1,77 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CreateQuizInfoFragment"
-    android:background="@color/colorGray"
-    android:orientation="vertical">
+    tools:context=".fragments.CreateQuizInfoFragment">
+
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Create a Quiz"
+        android:textColor="#000000"
         android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.548" />
 
-    <EditText
-        android:id="@+id/titleInput"
-        android:layout_width="match_parent"
-        android:layout_height="77dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Ex. MOBAPDE Test"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subject"
-        android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"></TextView>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="361dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="144dp"
+        android:hint="Title"
+        app:layout_constraintBottom_toTopOf="@+id/nextBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <EditText
-        android:id="@+id/subjectInput"
-        android:layout_width="match_parent"
-        android:layout_height="77dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Ex. MOBAPDE"
-        android:textColor="#70979797"
-        android:textSize="18sp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:text="Ex. Input" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"></TextView>
 
-    <EditText
-        android:id="@+id/descriptionInput"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Ex. A Test on MOBAPDE Terms"
-        android:textColor="#70979797"
-        android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/nextBtn"
-        android:background="@drawable/rounded_black_button"
-        android:textColor="@android:color/white"
-        android:layout_width="100sp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
         android:onClick="nextFragment"
-        android:layout_gravity="center"
-        android:text="Next">
-    </Button>
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="152dp" />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

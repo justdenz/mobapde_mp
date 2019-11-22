@@ -22,12 +22,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        for (int i= 0; i<8; i++) {
+            Quiz q = new Quiz();
+
+            q.setTitle("Quiz " + i );
+            q.setSubject("Subject");
+
+            quizzes.add(q);
+        }
+
         initRecyclerView();
     }
 
     
 
     private void initRecyclerView(){
+
         recyclerView = findViewById(R.id.recycler_view_pinned);
         quizCardAdapter = new QuizCardAdapter(this, quizzes);
         recyclerView.setAdapter(quizCardAdapter);

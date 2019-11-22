@@ -5,7 +5,6 @@
     android:id="@+id/linearLayout2"
     android:layout_width="300dp"
     android:layout_height="180dp"
-    android:background="@color/colorGray"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".StatsActivity">
@@ -13,7 +12,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/material_button"
+        android:id="@+id/nextBtn"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
