@@ -7,7 +7,7 @@
     android:gravity="center"
     android:background="@color/colorGray"
     android:orientation="vertical"
-    tools:context=".TakeQuizIntro">
+    tools:context=".TakeQuizActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

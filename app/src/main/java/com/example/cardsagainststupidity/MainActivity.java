@@ -7,10 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<Quiz> quizzes = new ArrayList<>();
+
+    RecyclerView recyclerView;
+    QuizCardAdapter quizCardAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     
 
     private void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_pinned);
-        QuizCardAdapter quizCardAdapter = new QuizCardAdapter(this);
+        recyclerView = findViewById(R.id.recycler_view_pinned);
+        quizCardAdapter = new QuizCardAdapter(this, quizzes);
         recyclerView.setAdapter(quizCardAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
