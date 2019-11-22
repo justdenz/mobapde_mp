@@ -35,4 +35,9 @@ public class CreateQuizActivity extends AppCompatActivity {
         ft.replace(R.id.frame_container, fragment, tag);
         ft.commitAllowingStateLoss();
     }
+
+    public void nextPage(View view) {
+
+
+    }
 }

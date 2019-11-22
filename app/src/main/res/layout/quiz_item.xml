@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quizCard"
     android:layout_width="325dp"
-    android:layout_height="200dp"
-    android:background="@color/colorGray"
-    app:cardCornerRadius="10dp"
+    android:layout_height="150dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:id="@+id/quizCard">
+    android:background="@color/colorGray"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,80 +20,52 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="Title"
+            android:text="Finals Reviewer"
             android:textColor="#000000"
-            android:textSize="35sp"
+            android:textSize="25sp"
             android:textStyle="bold"></TextView>
 
         <TextView
             android:id="@+id/quizSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizTitle"
-            android:text="Subject"
-            android:textSize="20sp"></TextView>
-
-        <TextView
-            android:id="@+id/quizDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/quizSubject"
-            android:text="Description"
-            android:textSize="17sp"></TextView>
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="34dp"
+            android:text="AUTOMAT"
+            android:textSize="15sp"></TextView>
 
         <TextView
             android:id="@+id/quizAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizDescription"
-            android:layout_marginTop="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="9dp"
             android:gravity="bottom"
             android:text="# Flashcards"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold"></TextView>
 
-        <TextView
-            android:id="@+id/quizFlashCardQuantity"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/material_button"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizAuthor"
-            android:layout_marginTop="1dp"
-            android:gravity="bottom"
-            android:text="by author"
-            android:textSize="17sp"></TextView>
-
-        <Button
-            android:id="@+id/pinQuizBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/quizFlashCardQuantity"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="207dp"
-            android:layout_marginBottom="55dp"
-            android:background="@drawable/rounded_white_button"
-            android:padding="5dp"
-            android:text="Pin Quiz"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="14sp"></Button>
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="0dp"
+            android:text="Take Quiz" />
 
-        <Button
-            android:id="@+id/takeQuizBtn"
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/quizFlashCardQuantity"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="207dp"
-            android:layout_marginBottom="3dp"
-            android:background="@drawable/rounded_black_button"
-            android:padding="5dp"
-            android:text="Take Quiz"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"></Button>
+            android:src="@drawable/ic_overflow_holo_dark"
+            android:contentDescription="@string/descr_overflow_button"
+            android:onClick="showPopup" />
 
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>

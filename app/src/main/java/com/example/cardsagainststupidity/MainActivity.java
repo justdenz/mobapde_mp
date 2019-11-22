@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    
+
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_pinned);
         QuizCardAdapter quizCardAdapter = new QuizCardAdapter(this);
