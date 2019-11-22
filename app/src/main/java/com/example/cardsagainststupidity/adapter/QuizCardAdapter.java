@@ -66,7 +66,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             quizCard = itemView.findViewById(R.id.quizCard);
             takeQuizBtn = itemView.findViewById(R.id.takeQuizBtn);
 
-            
+
         }
 
         public void setHolderQuizID(int id){
