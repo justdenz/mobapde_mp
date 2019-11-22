@@ -6,23 +6,34 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cardsagainststupidity.CreateQuizActivity;
 import com.example.cardsagainststupidity.R;
 
 public class CreateQuizInfoFragment extends Fragment {
 
-    private QuizInfoFragmentListener listener;
+    private static final String TAG = "CreateQuizInfoFragment";
     private EditText titleInput, subjectInput, descriptionInput;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
     private Button nextBtn;
 
-    public interface QuizInfoFragmentListener{
-        void onInputQuizInfoSent(CharSequence input);
+    public CreateQuizInfoFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -38,37 +49,20 @@ public class CreateQuizInfoFragment extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CharSequence input = titleInput.getText();
-                listener.onInputQuizInfoSent(input);
-
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = manager.beginTransaction();
-
-                ft.replace(R.id.frame_container, new CreateQuizCardsFragment());
-                ft.commit();
+                ((CreateQuizActivity) getActivity()).goNext();
+                ((CreateQuizActivity) getActivity()).setQuizInfo(titleInput.getText().toString(), subjectInput.getText().toString(), descriptionInput.getText().toString());
             }
         });
+
         return  view;
     }
 
-    public void updateTitleInput(CharSequence newText){
-        titleInput.setText(newText);
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof QuizInfoFragmentListener){
-            listener = (QuizInfoFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement QuizInfoFragmentListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
+
+
+
+
+
 
 }

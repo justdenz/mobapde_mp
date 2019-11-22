@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cardsagainststupidity.CreateQuizActivity;
 import com.example.cardsagainststupidity.R;
 
 public class CreateQuizCardsFragment extends Fragment {
@@ -17,6 +19,7 @@ public class CreateQuizCardsFragment extends Fragment {
     private CreateQuizCardsFragmentListener listener;
 
     EditText questionInput;
+    Button backBtn;
 
     public interface CreateQuizCardsFragmentListener{
         void onInputQuizCardSent(CharSequence input);
@@ -33,28 +36,15 @@ public class CreateQuizCardsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.create_quiz_cards_fragment, container, false);
-        questionInput = view.findViewById(R.id.questionInput);
+        backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CreateQuizActivity) getActivity()).goBack();
+            }
+        });
         return  view;
     }
 
-    public void updateQuestionInput(CharSequence newText){
-        questionInput.setText(newText);
-    }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof CreateQuizCardsFragment.CreateQuizCardsFragmentListener){
-            listener = (CreateQuizCardsFragment.CreateQuizCardsFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement QuizCardFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
 }

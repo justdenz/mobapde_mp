@@ -40,6 +40,11 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
+        holder.setHolderQuizID(quizzes.get(position).getQuizID());
+        holder.quizTitle.setText(quizzes.get(position).getTitle());
+        holder.quizSubject.setText(quizzes.get(position).getSubject());
+        holder.quizDescription.setText(quizzes.get(position).getDescription());
+        holder.quizFlashCardQuantity.setText(quizzes.get(position).getDeck().size());
     }
 
     @Override
@@ -52,6 +57,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         TextView titleTxtView, subjectTxtView, nFlashcardsTxtView;
         CardView quizCard;
         Button takeQuizBtn;
+        int holderQuizID;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,5 +69,11 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
 
 
         }
+
+        public void setHolderQuizID(int id){
+            this.holderQuizID = id;
+        }
+
+
     }
 }
