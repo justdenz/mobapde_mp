@@ -6,7 +6,6 @@
     android:background="@color/colorGray"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E8E8E8"
     tools:context=".CreateQuizActivity">
 
     <FrameLayout
@@ -15,9 +14,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"></FrameLayout>
-
-
-
-
 
 </LinearLayout>

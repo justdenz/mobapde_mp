@@ -41,33 +41,23 @@
             android:textSize="17sp"></TextView>
 
         <TextView
-            android:id="@+id/quizAuthor"
+            android:id="@+id/quizFlashCardQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/quizDescription"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:gravity="bottom"
             android:text="# Flashcards"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
 
-        <TextView
-            android:id="@+id/quizFlashCardQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/quizAuthor"
-            android:layout_marginTop="1dp"
-            android:gravity="bottom"
-            android:text="by author"
-            android:textSize="17sp"></TextView>
 
 
         <Button
             android:id="@+id/takeQuizBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/quizFlashCardQuantity"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="207dp"
             android:layout_marginBottom="3dp"

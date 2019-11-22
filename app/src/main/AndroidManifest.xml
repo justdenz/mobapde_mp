@@ -10,23 +10,18 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".fragments.CreateQuizCardsFragment"></activity>
         <activity android:name=".fragments.CreateQuizInfoFragment" />
-=======
         <activity android:name=".StatsActivity"></activity>
         <activity android:name=".TakeQuizActivity" />
-        <activity android:name=".CreateQuizCardsFragment" />
-        <activity android:name=".CreateQuizInfoFragment" />
->>>>>>> 2f7764c7cade4a00dc90e8a44851ea782172429c
         <activity android:name=".CreateQuizActivity">
-        <activity android:name=".MainActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

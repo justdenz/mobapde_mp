@@ -40,6 +40,11 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
+        holder.setHolderQuizID(quizzes.get(position).getQuizID());
+        holder.quizTitle.setText(quizzes.get(position).getTitle());
+        holder.quizSubject.setText(quizzes.get(position).getSubject());
+        holder.quizDescription.setText(quizzes.get(position).getDescription());
+        holder.quizFlashCardQuantity.setText(quizzes.get(position).getDeck().size());
     }
 
     @Override
@@ -52,6 +57,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         TextView quizTitle, quizSubject, quizDescription, quizFlashCardQuantity, quizAuthor;
         CardView quizCard;
         Button takeQuizBtn;
+        int holderQuizID;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,9 +65,15 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             quizSubject = itemView.findViewById(R.id.quizSubject);
             quizDescription = itemView.findViewById(R.id.quizDescription);
             quizFlashCardQuantity = itemView.findViewById(R.id.quizFlashCardQuantity);
-            quizAuthor = itemView.findViewById(R.id.quizAuthor);
             quizCard = itemView.findViewById(R.id.quizCard);
             takeQuizBtn = itemView.findViewById(R.id.takeQuizBtn);
+            holderQuizID = -1;
         }
+
+        public void setHolderQuizID(int id){
+            this.holderQuizID = id;
+        }
+
+
     }
 }
