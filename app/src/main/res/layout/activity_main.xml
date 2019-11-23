@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -12,17 +12,25 @@
         android:id="@+id/textView2"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:text="My Quizzes"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createQuizButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="createQuiz"
+        android:layout_marginBottom="20dp"
+        android:text="Create Quiz" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_pinned"
         android:layout_width="match_parent"
-        android:layout_height="524dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="1dp"
         android:paddingLeft="16dp"
