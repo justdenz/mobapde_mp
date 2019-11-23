@@ -74,9 +74,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 
-	public List<Quiz> getAllQuizzes () {
+	public ArrayList<Quiz> getAllQuizzes () {
 
-		List<Quiz> quizList = new ArrayList<>();
+		ArrayList<Quiz> quizList = new ArrayList<>();
 
 		SQLiteDatabase db = this.getReadableDatabase();
 

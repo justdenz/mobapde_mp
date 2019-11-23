@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
+import com.example.cardsagainststupidity.database.DatabaseHandler;
 import com.example.cardsagainststupidity.fragments.CreateQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.CreateQuizInfoFragment;
 
@@ -25,6 +26,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private CreateQuizCardsFragment createQuizCardsFragment;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    private DatabaseHandler databaseHandler;
 
     private Quiz newQuiz;
 
@@ -32,6 +34,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quiz);
+        newQuiz = new Quiz();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 //        fragmentTransaction.add(R.id.frame_container, new CreateQuizCardsFragment(), "CREATE_QUIZ_CARD");
@@ -68,13 +71,14 @@ public class CreateQuizActivity extends AppCompatActivity {
 
     public void setQuizInfo(String title, String subject, String description){
         //set quiz info here
-//        this.newQuiz.setTitle(title);
-//        this.newQuiz.setSubject(subject);
-//        this.newQuiz.setDescription(description);
-        Log.d(TAG, title + subject + description);
+        this.newQuiz.setTitle(title);
+        this.newQuiz.setSubject(subject);
+        this.newQuiz.setDescription(description);
     }
 
-    public void setQuizDeck(ArrayList<Flashcard> deck){
+    public void publishQuiz(ArrayList<Flashcard> deck){
         this.newQuiz.setDeck(deck);
+        databaseHandler = new DatabaseHandler(this);
+        databaseHandler.addQuiz(newQuiz);
     }
 }

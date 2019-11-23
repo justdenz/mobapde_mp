@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cardsagainststupidity.CreateQuizActivity;
 import com.example.cardsagainststupidity.Model.Flashcard;
@@ -26,7 +28,7 @@ public class CreateQuizCardsFragment extends Fragment {
     TextInputEditText questionInput, answerInput;
     MaterialButton backBtn, publishBtn;
     ArrayList<Flashcard> flashcards;
-    MaterialButton backCardBtn, nextCardBtn;
+    ImageButton backCardBtn, nextCardBtn, removeCardBtn;
     TextView nthFlashCard;
     private int CURRENT_CARD = 1;
 
@@ -59,18 +61,30 @@ public class CreateQuizCardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 goPrevCard();
+                nextCardBtn.setBackgroundResource(R.drawable.next_button);
+
+                if(CURRENT_CARD == 1){
+                    backCardBtn.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
 
         nextCardBtn = view.findViewById(R.id.nextCardBtn);
+        nextCardBtn.setBackgroundResource(R.drawable.add_button);
         nextCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(CURRENT_CARD == flashcards.size()) {
+                    nextCardBtn.setBackgroundResource(R.drawable.add_button);
                     addCard();
+                    backCardBtn.setVisibility(View.VISIBLE);
                 }else{
                     goNextCard();
+                    if (CURRENT_CARD == flashcards.size()){
+                        nextCardBtn.setBackgroundResource(R.drawable.add_button);
+                    }
+                    backCardBtn.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -85,16 +99,47 @@ public class CreateQuizCardsFragment extends Fragment {
             }
         });
 
+        removeCardBtn = view.findViewById(R.id.removeCardBtn);
+        removeCardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flashcards.size() == 1){
+                    Toast.makeText(((CreateQuizActivity) getActivity()), "You should have at least one flashcard!", Toast.LENGTH_SHORT).show();
+                }else {
+                    removeCard();
+                }
+            }
+        });
 
         publishBtn = view.findViewById(R.id.publishBtn);
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CreateQuizActivity) getActivity()).setQuizDeck(flashcards);
+                ((CreateQuizActivity) getActivity()).publishQuiz(flashcards);
                 ((CreateQuizActivity) getActivity()).finish();
             }
         });
+
+        backCardBtn.setVisibility(View.INVISIBLE);
         return  view;
+    }
+
+    public void removeCard(){
+        flashcards.remove(CURRENT_CARD-1); // removes the current card
+        if(CURRENT_CARD == 1) {
+            CURRENT_CARD += 1;
+            backCardBtn.setVisibility(View.INVISIBLE);
+        }
+        else if (CURRENT_CARD == 2){
+            CURRENT_CARD -= 1;
+            backCardBtn.setVisibility(View.INVISIBLE);
+        } else{
+            CURRENT_CARD -=1;
+            backCardBtn.setVisibility(View.VISIBLE);
+        }
+        nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
+        questionInput.setText(flashcards.get(CURRENT_CARD-1).getQuestion());
+        answerInput.setText(flashcards.get(CURRENT_CARD-1).getAnswer());
     }
 
     public void addCard(){

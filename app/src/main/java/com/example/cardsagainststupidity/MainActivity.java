@@ -9,29 +9,25 @@ import android.view.View;
 
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
+import com.example.cardsagainststupidity.database.DatabaseHandler;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Quiz> quizzes = new ArrayList<>();
+    ArrayList<Quiz> quizzes;
 
     RecyclerView recyclerView;
     QuizCardAdapter quizCardAdapter;
+    DatabaseHandler databaseHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        databaseHandler = new DatabaseHandler(this);
 
 
-        for (int i= 0; i<8; i++) {
-            Quiz q = new Quiz();
-
-            q.setTitle("Quiz " + i );
-            q.setSubject("Subject");
-
-            quizzes.add(q);
-        }
+        quizzes = databaseHandler.getAllQuizzes();
 
         initRecyclerView();
     }

@@ -10,18 +10,17 @@
 
     <LinearLayout
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <com.google.android.material.button.MaterialButton
+        <ImageButton
             android:id="@+id/backCardBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cornerRadius="300dp"
-            android:textSize="24sp"
-            android:text="BACK"/>
+            android:background="@drawable/back_button">
+        </ImageButton>
 
         <TextView
             android:id="@+id/nthFlashCard"
@@ -34,26 +33,37 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"></TextView>
 
-        <com.google.android.material.button.MaterialButton
+        <ImageButton
             android:id="@+id/nextCardBtn"
-            android:layout_width="42dp"
-            android:layout_height="wrap_content"
-            app:cornerRadius="300dp"
-            android:textSize="24sp"
-            android:text="+"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_marginBottom="5dp"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40sp"
-        android:text="Question"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"></TextView>
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"></TextView>
+
+        <ImageButton
+            android:id="@+id/removeCardBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/remove_button"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/questionCard"
         android:layout_width="250dp"
         android:layout_height="150dp"
         style="@style/Widget.MaterialComponents.CardView"
@@ -61,9 +71,6 @@
         app:cardCornerRadius="4dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
-        android:layout_marginLeft="@dimen/mtrl_card_spacing"
-        android:layout_marginTop="@dimen/mtrl_card_spacing"
-        android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:layout_gravity="center_horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -86,12 +93,13 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
     <TextView
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40sp"
+        android:layout_marginLeft="50dp"
         android:text="Answer"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -105,9 +113,6 @@
         app:cardCornerRadius="4dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
-        android:layout_marginLeft="@dimen/mtrl_card_spacing"
-        android:layout_marginTop="@dimen/mtrl_card_spacing"
-        android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:layout_gravity="center_horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
