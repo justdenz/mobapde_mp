@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 
@@ -41,10 +43,34 @@ public class MainActivity extends AppCompatActivity {
 
         quizzes = databaseHandler.getAllQuizzes();
 
-
-
         initRecyclerView();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_search, menu);
+
+        MenuItem item = menu.findItem(R.id.main_search);
+
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint("Enter a keyword...");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
     
 
