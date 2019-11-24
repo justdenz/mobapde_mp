@@ -11,17 +11,5 @@
 
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/nextBtn"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take Quiz"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test" />
 </androidx.constraintlayout.widget.ConstraintLayout>

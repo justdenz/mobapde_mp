@@ -135,6 +135,10 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
             android:text="Back"
+            android:textColor="#000000"
+            app:backgroundTint="#FFFFFF"
+            app:icon="@drawable/ic_cancel"
+            app:iconTint="#000000"
             tools:text="I guessed" />
 
         <com.google.android.material.button.MaterialButton
@@ -142,7 +146,8 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I knew it!" />
+            android:text="I knew it!"
+            app:icon="@drawable/ic_check" />
 
 
 

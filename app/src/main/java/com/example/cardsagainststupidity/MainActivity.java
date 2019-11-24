@@ -1,6 +1,7 @@
 package com.example.cardsagainststupidity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
+
 
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     ArrayList<Quiz> quizzes;
-
     RecyclerView recyclerView;
     QuizCardAdapter quizCardAdapter;
     DatabaseHandler databaseHandler;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         databaseHandler = new DatabaseHandler(this);
 
         quizzes = databaseHandler.getAllQuizzes();
+
+
 
         initRecyclerView();
 
