@@ -36,7 +36,8 @@
         <ImageButton
             android:id="@+id/nextCardBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_button"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -141,7 +142,6 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_default_material"
             android:text="I knew it!" />
 
 
