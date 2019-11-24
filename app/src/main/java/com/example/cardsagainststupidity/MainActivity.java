@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,13 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         quizzes = databaseHandler.getAllQuizzes();
 
-        Log.d(TAG, "Question: " +quizzes.get(0).getDeck().get(1).getQuestion());
-        Log.d(TAG, "Answer: " + quizzes.get(0).getDeck().get(1).getAnswer());
-
         initRecyclerView();
 
     }
-
     
 
     private void initRecyclerView(){
