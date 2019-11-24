@@ -23,7 +23,7 @@
         </ImageButton>
 
         <TextView
-            android:id="@+id/nthFlashCard"
+            android:id="@+id/txtFlashcardNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -142,14 +142,14 @@
         android:layout_marginTop="20dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/backBtn"
+            android:id="@+id/btnGuessed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
             android:text="Back"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/publishBtn"
+            android:id="@+id/btnCorrect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Publish Quiz!"/>
