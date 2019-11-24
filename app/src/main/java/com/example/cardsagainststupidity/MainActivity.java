@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
+import com.example.cardsagainststupidity.util.Util;
 
 import java.util.ArrayList;
 
@@ -25,12 +27,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        databaseHandler = new DatabaseHandler(this);
 
+        //to reset db
+        //this.deleteDatabase(Util.DATABASE_NAME);
+        databaseHandler = new DatabaseHandler(this);
 
         quizzes = databaseHandler.getAllQuizzes();
 
+
         initRecyclerView();
+
     }
 
     

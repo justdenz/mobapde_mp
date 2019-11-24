@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
@@ -92,6 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				quiz.setSubject(cursor.getString(2));
 				quiz.setDescription(cursor.getString(3));
 				quiz.setDate_created(convertStringToDate(cursor.getString(4)));
+				quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quiz.getQuizID()));
 
 
 				//add contact objects to our list
@@ -199,9 +201,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// Insert to row
 		db.insert(Util.QUIZ_TABLE_NAME,  null, values);
 
-		addFlashcards(q.getDeck(), q.getQuizID());
+		addFlashcards(q.getDeck(), getLastInsertedQuizID());
 
 		db.close();
+	}
+
+	public int getLastInsertedQuizID() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query  = "SELECT MAX(" +Util.QUIZ_KEY_ID+") FROM "+Util.QUIZ_TABLE_NAME;
+
+		Cursor cursor = db.rawQuery(query, null);
+
+		if (cursor.moveToFirst()) {
+			return Integer.parseInt(cursor.getString(0));
+		}
+
+		return -1;
 	}
 
 
@@ -272,8 +287,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			values.put(Util.QUIZ_KEY_ID, quizID);
 			values.put(Util.FLASHCARD_KEY_QUESTION, d.getQuestion());
 			values.put(Util.FLASHCARD_KEY_ANSWER, d.getAnswer());
-			// Insert to row
 			db.insert(Util.FLASHCARD_TABLE_NAME,  null, values);
+			Log.d("Added", d.getAnswer() + d.getQuestion() + quizID);
 		}
 
 		db.close();
@@ -309,6 +324,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	private List<Flashcard> getFlashcardsByQuizID (int quizID) {
 
+
+
 		List<Flashcard> flashcardList = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -316,8 +333,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				" WHERE " + Util.QUIZ_KEY_ID + " = ?";
 		Cursor cursor = db.rawQuery(selectAll, new String[] {String.valueOf(quizID)});
 
+
 		//Loop through our data
 		if (cursor.moveToFirst()) {
+
 			do {
 				Flashcard flashcard = new Flashcard();
 				flashcard.setFlashcardID(Integer.parseInt(cursor.getString(0)));
