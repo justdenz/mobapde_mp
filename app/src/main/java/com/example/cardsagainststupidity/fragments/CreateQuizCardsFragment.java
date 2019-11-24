@@ -116,7 +116,7 @@ public class CreateQuizCardsFragment extends Fragment {
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateCurrentCard();
                 ((CreateQuizActivity) getActivity()).publishQuiz(flashcards);
             }
         });

@@ -29,12 +29,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_pinned"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="1dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:layout_marginBottom="1dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

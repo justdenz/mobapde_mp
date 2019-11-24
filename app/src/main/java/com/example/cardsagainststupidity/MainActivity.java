@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
@@ -17,6 +19,8 @@ import com.example.cardsagainststupidity.util.Util;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     ArrayList<Quiz> quizzes;
 
@@ -29,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //to reset db
-        //this.deleteDatabase(Util.DATABASE_NAME);
+//        this.deleteDatabase(Util.DATABASE_NAME);
         databaseHandler = new DatabaseHandler(this);
 
         quizzes = databaseHandler.getAllQuizzes();
 
+        Log.d(TAG, "Question: " +quizzes.get(0).getDeck().get(1).getQuestion());
+        Log.d(TAG, "Answer: " + quizzes.get(0).getDeck().get(1).getAnswer());
 
         initRecyclerView();
 
