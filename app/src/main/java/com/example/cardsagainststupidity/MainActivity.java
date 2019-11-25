@@ -66,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                
+                if (quizCardAdapter != null){
+                    quizCardAdapter.getFilter().filter(newText);
+                }
 
                 return false;
             }

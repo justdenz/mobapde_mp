@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,16 +19,18 @@ import com.example.cardsagainststupidity.R;
 
 import java.util.ArrayList;
 
-public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> {
+public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "QuizCardAdapter";
 
     private Context context;
     private ArrayList<Quiz> quizzes;
+    private ArrayList<Quiz> quizzes1;
 
     public QuizCardAdapter(Context context, ArrayList<Quiz> quizzes) {
         this.context = context;
         this.quizzes = quizzes;
+        this.quizzes1 = quizzes;
     }
 
     @NonNull
@@ -75,7 +78,46 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         }
 
 
+    }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                String charString = constraint.toString();
+
+                if (charString.isEmpty()){
+                    quizzes=quizzes1;
+                }else{
+
+                    ArrayList<Quiz> filterList = new ArrayList<>();
+
+                    for (Quiz data : quizzes1){
+
+                        if (data.getTitle().toLowerCase().contains(charString) || data.getSubject().toLowerCase().contains(charString)){
+                            filterList.add(data);
+                        }
+                    }
+
+                    quizzes = filterList;
+
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = quizzes;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                quizzes = (ArrayList<Quiz>) results.values;
+                notifyDataSetChanged();
+            }
+        };
 
     }
 }
