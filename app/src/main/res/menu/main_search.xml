@@ -35,9 +35,9 @@
     </item>
 
 
-
-
-    <item android:id="@+id/main_stats"
+    <item
+        android:id="@+id/main_stats"
+        android:onClick="viewStats"
         android:title="Statistics"
-        app:showAsAction="collapseActionView"/>
+        app:showAsAction="collapseActionView" />
 </menu>

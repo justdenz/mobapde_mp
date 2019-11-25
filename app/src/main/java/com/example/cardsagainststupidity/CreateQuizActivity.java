@@ -19,6 +19,7 @@ import com.example.cardsagainststupidity.fragments.CreateQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.CreateQuizInfoFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CreateQuizActivity extends AppCompatActivity {
     private static final String TAG = "CreateQuizActivity";
@@ -28,7 +29,6 @@ public class CreateQuizActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private DatabaseHandler databaseHandler;
-
     private Quiz newQuiz;
 
     @Override
@@ -38,6 +38,7 @@ public class CreateQuizActivity extends AppCompatActivity {
         newQuiz = new Quiz();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 //        fragmentTransaction.add(R.id.frame_container, new CreateQuizCardsFragment(), "CREATE_QUIZ_CARD");
         fragmentTransaction.add(R.id.frame_container, new CreateQuizInfoFragment(), "CREATE_QUIZ_INFO");
         fragmentTransaction.commit();

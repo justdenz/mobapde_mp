@@ -104,4 +104,9 @@ public class MainActivity extends AppCompatActivity {
     public void sortBySubject(MenuItem item) {
         quizCardAdapter.sortBySubject();
     }
+
+    public void viewStats(MenuItem item) {
+        Intent intent = new Intent(this, StatsActivity.class);
+        startActivity(intent);
+    }
 }

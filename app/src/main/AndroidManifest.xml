@@ -11,13 +11,12 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-        <activity android:name=".StatsActivity"/>
-        <activity android:name=".TakeQuizActivity" />
-        <activity android:name=".fragments.CreateQuizCardsFragment" />
-        <activity android:name=".fragments.CreateQuizInfoFragment" />
-
-        <activity android:name=".CreateQuizActivity"/>
-
+        <activity android:name=".StatsActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".TakeQuizActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".CreateQuizActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".fragments.CreateQuizCardsFragment" />
+        <activity android:name=".fragments.CreateQuizInfoFragment" />
+        <activity android:name=".fragments.TakeQuizCardsFragment" />
+        <activity android:name=".fragments.TakeQuizInfoFragment" />
+        <activity android:name=".fragments.TakeQuizScoreFragment" />
 
 
     </application>
