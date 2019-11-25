@@ -9,8 +9,34 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/sort_by"
+
         android:title="Sort By"
-        app:showAsAction="collapseActionView" />
+        app:showAsAction="collapseActionView">
+
+        <menu>
+            <item
+                android:id="@+id/sort_by_date"
+                android:onClick="sortByDate"
+                android:title="Date" />
+
+            <item
+                android:id="@+id/sort_by_title"
+                android:onClick="sortByTitle"
+                android:title="Title" />
+
+            <item
+                android:id="@+id/sort_by_subject"
+                android:onClick="sortBySubject"
+                android:title="Subject" />
+
+        </menu>
+
+
+    </item>
+
+
+
+
     <item android:id="@+id/main_stats"
         android:title="Statistics"
         app:showAsAction="collapseActionView"/>

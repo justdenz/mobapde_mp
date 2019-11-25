@@ -18,8 +18,10 @@ import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> implements Filterable {
+public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> implements Filterable  {
 
     private static final String TAG = "QuizCardAdapter";
 
@@ -31,7 +33,10 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         this.context = context;
         this.quizzes = quizzes;
         this.quizzes1 = quizzes;
+        sortByDate();
     }
+
+
 
     @NonNull
     @Override
@@ -80,6 +85,9 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
 
     }
 
+
+
+
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -120,4 +128,43 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         };
 
     }
+
+    public void sortByDate() {
+        Collections.sort(quizzes, new Comparator<Quiz>() {
+            public int compare(Quiz o1, Quiz o2) {
+                if (o1.getDate_created() == null || o2.getDate_created() == null)
+                    return 0;
+                return o2.getDate_created().compareTo(o1.getDate_created());
+            }
+        });
+
+        notifyDataSetChanged();
+    }
+
+    public void sortByTitle() {
+        Collections.sort(quizzes, new Comparator<Quiz>() {
+            public int compare(Quiz o1, Quiz o2) {
+                if (o1.getTitle() == null || o2.getTitle() == null)
+                    return 0;
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });
+
+        notifyDataSetChanged();
+    }
+
+    public void sortBySubject() {
+        Collections.sort(quizzes, new Comparator<Quiz>() {
+            public int compare(Quiz o1, Quiz o2) {
+                if (o1.getSubject() == null || o2.getSubject() == null)
+                    return 0;
+                return o1.getSubject().compareTo(o2.getSubject());
+            }
+        });
+
+        notifyDataSetChanged();
+    }
+
+
+
 }

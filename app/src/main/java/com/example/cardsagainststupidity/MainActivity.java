@@ -91,4 +91,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateQuizActivity.class);
         startActivity(intent);
     }
+
+
+    public void sortByDate(MenuItem item) {
+        quizCardAdapter.sortByDate();
+    }
+
+    public void sortByTitle(MenuItem item) {
+        quizCardAdapter.sortByTitle();
+    }
+
+    public void sortBySubject(MenuItem item) {
+        quizCardAdapter.sortBySubject();
+    }
 }
