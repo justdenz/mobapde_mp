@@ -16,7 +16,7 @@
         android:gravity="center">
 
         <ImageButton
-            android:id="@+id/backCardBtn"
+            android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_button">
@@ -33,11 +33,6 @@
             android:textSize="24sp"
             android:textStyle="bold"></TextView>
 
-        <ImageButton
-            android:id="@+id/nextCardBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/add_button"/>
     </LinearLayout>
 
     <RelativeLayout
