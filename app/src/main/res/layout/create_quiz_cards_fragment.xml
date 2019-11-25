@@ -145,13 +145,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
-            android:text="Back" />
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Back"
+            android:textColor="#000000"
+            app:backgroundTint="#FFFFFF"
+            app:icon="@drawable/ic_left_arrow"
+            app:iconTint="#000000" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/publishBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Publish Quiz!" />
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Publish"
+            app:icon="@drawable/ic_check" />
 
 
     </LinearLayout>
