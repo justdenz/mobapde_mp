@@ -13,7 +13,7 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="30dp"
@@ -35,7 +35,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Title"
             android:textColorHint="@android:color/darker_gray">
@@ -49,7 +49,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:hint="Subject"
@@ -64,7 +64,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:hint="Description"
@@ -86,12 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:insetBottom="6dp"
-            android:paddingLeft="23dp"
-            android:paddingTop="9dp"
-            android:paddingRight="23dp"
-            android:paddingBottom="9dp"
             android:text="Next"
-            android:textSize="19sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>
