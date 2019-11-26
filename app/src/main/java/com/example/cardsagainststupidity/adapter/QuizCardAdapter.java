@@ -1,28 +1,34 @@
 package com.example.cardsagainststupidity.adapter;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cardsagainststupidity.MainActivity;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.R;
+import com.example.cardsagainststupidity.database.DatabaseHandler;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> implements Filterable  {
+public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHolder> implements Filterable{
 
     private static final String TAG = "QuizCardAdapter";
 
@@ -35,6 +41,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         this.quizzes = quizzes;
         this.quizzes1 = quizzes;
         sortByDate();
+
     }
 
 
@@ -49,8 +56,10 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         return holder;
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
         holder.setHolderQuizID(quizzes.get(position).getQuizID());
         holder.titleTxtView.setText(quizzes.get(position).getTitle());
@@ -63,11 +72,14 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         return quizzes.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView titleTxtView, subjectTxtView, nFlashcardsTxtView;
         CardView quizCard;
-        Button takeQuizBtn;
+        Button takeQuizBtn, moreBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,17 +90,62 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             nFlashcardsTxtView = itemView.findViewById(R.id.nFlashcardsTxtView);
             quizCard = itemView.findViewById(R.id.quizCard);
             takeQuizBtn = itemView.findViewById(R.id.takeQuizBtn);
+            moreBtn = itemView.findViewById(R.id.moreBtn);
+
+            moreBtn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick (View view) {
+
+            final int position;
+            position = getAdapterPosition();
+
+            switch (view.getId()) {
+                case R.id.moreBtn: //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, this.moreBtn);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.more_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.edit:
+
+                                    //handle menu1 click
+                                    break;
+                                case R.id.delete:
+                                    MainActivity activity = (MainActivity) context;
+                                    activity.deleteQuiz(quizzes.get(position).getQuizID(), position);
+                                    break;
+
+                            }
+                            return false;
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                    break;
+            }
 
         }
+
 
         public void setHolderQuizID(int id){
             itemView.setTag(id);
         }
 
 
-
-
     }
+    public void removeQuiz (int position) {
+        quizzes.remove(position);
+        notifyDataSetChanged();
+    }
+
+
+
+
 
 
 

@@ -5,6 +5,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -124,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public DatabaseHandler getDatabaseHandler () {
+        return this.databaseHandler;
+    }
+
 
     public void viewCard(View view) {
 
@@ -132,5 +138,30 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent (this, CardInfoActivity.class);
         intent.putExtra("ID", id);
         startActivityForResult(intent, MODIFY_QUIZ);
+    }
+
+    public void deleteQuiz(final int quizID, final int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setTitle("Delete Quiz");
+        builder.setMessage("Are you sure you want to delete this quiz? This cannot be reverted.");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                databaseHandler.deleteQuiz(quizID);
+                quizCardAdapter.removeQuiz(position);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorDelete));
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorCancel));
     }
 }

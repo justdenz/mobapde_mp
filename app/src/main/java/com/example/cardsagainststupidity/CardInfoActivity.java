@@ -87,7 +87,5 @@ public class CardInfoActivity extends AppCompatActivity {
 		alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorCancel));
 
 
-
-
 	}
 }
