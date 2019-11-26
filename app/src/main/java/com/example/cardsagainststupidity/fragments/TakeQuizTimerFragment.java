@@ -20,9 +20,9 @@ import com.google.android.material.button.MaterialButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TakeQuizInfoFragment extends Fragment {
+public class TakeQuizTimerFragment extends Fragment {
 
-    private static final String TAG = "TakeQuizInfoFragment";
+    private static final String TAG = "TakeQuizTimerFragment";
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -33,7 +33,7 @@ public class TakeQuizInfoFragment extends Fragment {
 
     int timerSeconds;
 
-    public TakeQuizInfoFragment() {
+    public TakeQuizTimerFragment() {
         // Required empty public constructor
     }
 
@@ -42,7 +42,7 @@ public class TakeQuizInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_take_quiz_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_take_quiz_timer, container, false);
         txtQuizTitle = view.findViewById(R.id.txtQuizTitle);
         txtSubject = view.findViewById(R.id.txtSubject);
         txtQuizDescription = view.findViewById(R.id.txtQuizDescription);

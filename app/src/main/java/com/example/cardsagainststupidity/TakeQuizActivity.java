@@ -11,12 +11,12 @@ import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
 import com.example.cardsagainststupidity.fragments.TakeQuizCardsFragment;
-import com.example.cardsagainststupidity.fragments.TakeQuizInfoFragment;
+import com.example.cardsagainststupidity.fragments.TakeQuizTimerFragment;
 import com.example.cardsagainststupidity.fragments.TakeQuizScoreFragment;
 
 public class TakeQuizActivity extends AppCompatActivity {
 
-    private TakeQuizInfoFragment takeQuizInfoFragment;
+    private TakeQuizTimerFragment takeQuizTimerFragment;
     private TakeQuizCardsFragment takeQuizCardsFragment;
     private TakeQuizScoreFragment takeQuizScoreFragment;
     private FragmentManager fragmentManager;
@@ -32,19 +32,19 @@ public class TakeQuizActivity extends AppCompatActivity {
         databaseHandler = new DatabaseHandler(this);
         Intent intent = getIntent();
         int quizID = intent.getIntExtra("QUIZ",-1);
-        takeQuizInfoFragment = new TakeQuizInfoFragment();
+        takeQuizTimerFragment = new TakeQuizTimerFragment();
         takeQuizCardsFragment = new TakeQuizCardsFragment();
         takeQuizScoreFragment = new TakeQuizScoreFragment();
         currentQuiz = databaseHandler.getQuiz(quizID);
         fragmentManager = getSupportFragmentManager();
-        fragmentTransaction.add(R.id.frame_container, takeQuizInfoFragment, "TAKE_QUIZ_INFO");
+        fragmentTransaction.add(R.id.frame_container, takeQuizTimerFragment, "TAKE_QUIZ_INFO");
         fragmentTransaction.addToBackStack("TAKE_QUIZ_INFO");
         fragmentTransaction.commit();
     }
 
     /*public void viewInfo(){
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.frame_container, takeQuizInfoFragment, "TAKE_QUIZ_INFO");
+        fragmentTransaction.add(R.id.frame_container, takeQuizTimerFragment, "TAKE_QUIZ_INFO");
         fragmentTransaction.addToBackStack("TAKE_QUIZ_INFO");
         fragmentTransaction.commit();
         /*if(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_CARD") == null) {
@@ -75,8 +75,8 @@ public class TakeQuizActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }*/
 
-    public TakeQuizInfoFragment getTakeQuizInfoFragment() {
-        return takeQuizInfoFragment;
+    public TakeQuizTimerFragment getTakeQuizTimerFragment() {
+        return takeQuizTimerFragment;
     }
 
     public TakeQuizCardsFragment getTakeQuizCardsFragment() {

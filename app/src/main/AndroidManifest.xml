@@ -38,7 +38,7 @@
         <activity android:name=".fragments.CreateQuizCardsFragment" />
         <activity android:name=".fragments.CreateQuizInfoFragment" />
         <activity android:name=".fragments.TakeQuizCardsFragment" />
-        <activity android:name=".fragments.TakeQuizInfoFragment" />
+        <activity android:name=".fragments.TakeQuizTimerFragment" />
         <activity android:name=".fragments.TakeQuizScoreFragment" />
     </application>
 
