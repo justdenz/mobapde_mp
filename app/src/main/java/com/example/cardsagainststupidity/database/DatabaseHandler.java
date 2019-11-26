@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -274,7 +275,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			values.put(Util.FLASHCARD_KEY_QUESTION, d.getQuestion());
 			values.put(Util.FLASHCARD_KEY_ANSWER, d.getAnswer());
 			db.insert(Util.FLASHCARD_TABLE_NAME,  null, values);
-			Log.d("Added", d.getAnswer() + d.getQuestion() + quizID);
 		}
 
 		db.close();
@@ -341,7 +341,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Date date = null;
 		try {
-			date = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").parse(d);
+			date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(d);
+			Log.d("DATE", date.toString());
 			return date;
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -355,7 +356,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Date date = Calendar.getInstance().getTime();
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		return dateFormat.format(date);
 	}
