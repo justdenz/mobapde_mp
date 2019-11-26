@@ -14,14 +14,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.cardsagainststupidity.R;
+import com.example.cardsagainststupidity.TakeQuizActivity;
 import com.google.android.material.button.MaterialButton;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TakeQuizInfoFragment extends Fragment {
+public class TakeQuizTimerFragment extends Fragment {
 
-    private static final String TAG = "TakeQuizInfoFragment";
+    private static final String TAG = "TakeQuizTimerFragment";
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -30,7 +31,9 @@ public class TakeQuizInfoFragment extends Fragment {
     EditText secondsInput;
     MaterialButton btnCancel, btnNext;
 
-    public TakeQuizInfoFragment() {
+    int timerSeconds;
+
+    public TakeQuizTimerFragment() {
         // Required empty public constructor
     }
 
@@ -39,7 +42,7 @@ public class TakeQuizInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_take_quiz_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_take_quiz_timer, container, false);
         txtQuizTitle = view.findViewById(R.id.txtQuizTitle);
         txtSubject = view.findViewById(R.id.txtSubject);
         txtQuizDescription = view.findViewById(R.id.txtQuizDescription);
@@ -48,10 +51,30 @@ public class TakeQuizInfoFragment extends Fragment {
         btnCancel = view.findViewById(R.id.btnCancel);
         btnNext = view.findViewById(R.id.btnNext);
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next(v);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void next(View v){
+        TakeQuizActivity quizActivity = (TakeQuizActivity) getActivity();
+        fragmentManager = quizActivity.getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(quizActivity.getTakeQuizCardsFragment(),"TAKE_QUIZ_CARDS");
+        fragmentTransaction.commit();
     }
 
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.TakeQuizInfoFragment"
+    tools:context=".fragments.TakeQuizTimerFragment"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -129,6 +129,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_black_button"
+                    android:onClick="next"
                     android:text="Next"
                     android:textColor="#DEFFFFFF"
                     android:textSize="18sp" />
