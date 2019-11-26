@@ -92,21 +92,33 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void sortBy(MenuItem item) {
+        switch (item.getItemId()) {
 
-    public void sortByDate(MenuItem item) {
-        quizCardAdapter.sortByDate();
+            case R.id.sort_by_date: quizCardAdapter.sortByDate(); break;
+            case R.id.sort_by_title: quizCardAdapter.sortByTitle(); break;
+            case R.id.sort_by_subject: quizCardAdapter.sortBySubject(); break;
+
+        }
     }
 
-    public void sortByTitle(MenuItem item) {
-        quizCardAdapter.sortByTitle();
-    }
-
-    public void sortBySubject(MenuItem item) {
-        quizCardAdapter.sortBySubject();
-    }
 
     public void viewStats(MenuItem item) {
         Intent intent = new Intent(this, StatsActivity.class);
         startActivity(intent);
+    }
+
+
+    public void viewCard(View view) {
+
+
+        int id = (int) view.getTag();
+
+        Log.d("ID", id + "");
+
+        Intent intent = new Intent (this, CardInfoActivity.class);
+        intent.putExtra("ID", id);
+        startActivity(intent);
+
     }
 }

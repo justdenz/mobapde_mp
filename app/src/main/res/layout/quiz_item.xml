@@ -10,6 +10,8 @@
     android:layout_marginRight="7dp"
     android:layout_marginBottom="0dp"
     android:background="@color/colorGray"
+    android:onClick="viewCard"
+
     app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
     app:cardPreventCornerOverlap="true"
@@ -62,20 +64,6 @@
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="0dp"
             android:text="Take Quiz" />
-
-        <Button
-            android:id="@+id/button"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="43dp"
-            android:layout_height="22dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="3dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            app:backgroundTint="#FFFFFF"
-            app:icon="@drawable/ic_expand"
-            app:iconPadding="0dp"
-            app:iconTint="#000000" />
 
 
     </RelativeLayout>

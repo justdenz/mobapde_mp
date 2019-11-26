@@ -16,17 +16,17 @@
         <menu>
             <item
                 android:id="@+id/sort_by_date"
-                android:onClick="sortByDate"
+                android:onClick="sortBy"
                 android:title="Date" />
 
             <item
                 android:id="@+id/sort_by_title"
-                android:onClick="sortByTitle"
+                android:onClick="sortBy"
                 android:title="Title" />
 
             <item
                 android:id="@+id/sort_by_subject"
-                android:onClick="sortBySubject"
+                android:onClick="sortBy"
                 android:title="Subject" />
 
         </menu>

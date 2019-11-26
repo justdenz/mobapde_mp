@@ -3,35 +3,43 @@
     package="com.example.cardsagainststupidity">
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StatsActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".TakeQuizActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".CreateQuizActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".StatsActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CardInfoActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TakeQuizActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CreateQuizActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".fragments.CreateQuizCardsFragment" />
         <activity android:name=".fragments.CreateQuizInfoFragment" />
         <activity android:name=".fragments.TakeQuizCardsFragment" />
         <activity android:name=".fragments.TakeQuizInfoFragment" />
         <activity android:name=".fragments.TakeQuizScoreFragment" />
-
-
     </application>
 
 </manifest>

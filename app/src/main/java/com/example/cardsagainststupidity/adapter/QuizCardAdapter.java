@@ -65,22 +65,24 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         TextView titleTxtView, subjectTxtView, nFlashcardsTxtView;
         CardView quizCard;
         Button takeQuizBtn;
-        int holderQuizID;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+
             titleTxtView = itemView.findViewById(R.id.titleTxtView);
             subjectTxtView = itemView.findViewById(R.id.subjectTxtView);
             nFlashcardsTxtView = itemView.findViewById(R.id.nFlashcardsTxtView);
             quizCard = itemView.findViewById(R.id.quizCard);
             takeQuizBtn = itemView.findViewById(R.id.takeQuizBtn);
 
-
         }
 
         public void setHolderQuizID(int id){
-            this.holderQuizID = id;
+            itemView.setTag(id);
         }
+
+
 
 
     }
