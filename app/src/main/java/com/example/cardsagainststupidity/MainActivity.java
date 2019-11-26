@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 databaseHandler.deleteQuiz(quizID);
-                quizCardAdapter.removeQuiz(position);
+                quizCardAdapter.refresh(databaseHandler.getAllQuizzes());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

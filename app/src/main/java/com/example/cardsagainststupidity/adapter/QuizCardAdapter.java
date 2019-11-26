@@ -138,21 +138,6 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
 
 
     }
-    public void removeQuiz (int position) {
-        quizzes.remove(position);
-
-        if (quizzes1.size() > 0) {
-            quizzes1.remove(position);
-        }
-
-        notifyDataSetChanged();
-    }
-
-
-
-
-
-
 
 
     @Override
