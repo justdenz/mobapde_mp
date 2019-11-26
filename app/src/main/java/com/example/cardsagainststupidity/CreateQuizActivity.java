@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
@@ -72,10 +73,14 @@ public class CreateQuizActivity extends AppCompatActivity {
     }
 
     public void setQuizInfo(String title, String subject, String description){
-        //set quiz info here
-        this.newQuiz.setTitle(title);
-        this.newQuiz.setSubject(subject);
-        this.newQuiz.setDescription(description);
+
+
+            //set quiz info here
+            this.newQuiz.setTitle(title);
+            this.newQuiz.setSubject(subject);
+            this.newQuiz.setDescription(description);
+
+
     }
 
     public void publishQuiz(ArrayList<Flashcard> deck){
@@ -86,4 +91,6 @@ public class CreateQuizActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
 }

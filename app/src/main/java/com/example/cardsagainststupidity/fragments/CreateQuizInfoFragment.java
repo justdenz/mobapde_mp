@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.cardsagainststupidity.CreateQuizActivity;
 import com.example.cardsagainststupidity.R;
@@ -50,12 +51,37 @@ public class CreateQuizInfoFragment extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CreateQuizActivity) getActivity()).setQuizInfo(titleInput.getText().toString(), subjectInput.getText().toString(), descriptionInput.getText().toString());
-                ((CreateQuizActivity) getActivity()).goNext();
+
+                if (isComplete(titleInput.getText().toString(), subjectInput.getText().toString(), descriptionInput.getText().toString())) {
+                    ((CreateQuizActivity) getActivity()).setQuizInfo(titleInput.getText().toString(), subjectInput.getText().toString(), descriptionInput.getText().toString());
+                    ((CreateQuizActivity) getActivity()).goNext();
+                }
+                else {
+                    Toast.makeText((CreateQuizActivity) getActivity(), "Please fill up all the fields", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
         return  view;
+    }
+
+    private boolean isComplete(String title, String subject, String description) {
+
+        if (title.trim().isEmpty()) {
+            return false;
+        }
+        else if (subject.trim().isEmpty()) {
+            return false;
+        }
+        else if (description.trim().isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
     }
 
 
