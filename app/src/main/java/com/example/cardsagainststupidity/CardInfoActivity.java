@@ -40,7 +40,7 @@ public class CardInfoActivity extends AppCompatActivity {
 		editBtn = findViewById(R.id.editBtn);
 		takeQuizBtn = findViewById(R.id.takeQuizBtn);
 
-		float highscore = databaseHandler.getHighscoreByQuizID(id);
+		//float highscore = databaseHandler.getHighscoreByQuizID(id);
 
 		SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
 
