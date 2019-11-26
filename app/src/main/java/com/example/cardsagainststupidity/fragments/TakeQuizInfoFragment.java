@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.cardsagainststupidity.R;
+import com.example.cardsagainststupidity.TakeQuizActivity;
 import com.google.android.material.button.MaterialButton;
 
 /**
@@ -29,6 +30,8 @@ public class TakeQuizInfoFragment extends Fragment {
     TextView txtQuizTitle, txtSubject, txtQuizDescription, txtCardNumber;
     EditText secondsInput;
     MaterialButton btnCancel, btnNext;
+
+    int timerSeconds;
 
     public TakeQuizInfoFragment() {
         // Required empty public constructor
@@ -48,10 +51,30 @@ public class TakeQuizInfoFragment extends Fragment {
         btnCancel = view.findViewById(R.id.btnCancel);
         btnNext = view.findViewById(R.id.btnNext);
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next(v);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void next(View v){
+        TakeQuizActivity quizActivity = (TakeQuizActivity) getActivity();
+        fragmentManager = quizActivity.getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(quizActivity.getTakeQuizCardsFragment(),"TAKE_QUIZ_CARDS");
+        fragmentTransaction.commit();
     }
 
 }

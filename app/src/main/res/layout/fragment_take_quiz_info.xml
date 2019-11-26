@@ -129,6 +129,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_black_button"
+                    android:onClick="next"
                     android:text="Next"
                     android:textColor="#DEFFFFFF"
                     android:textSize="18sp" />
