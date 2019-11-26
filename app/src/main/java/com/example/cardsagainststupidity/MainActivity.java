@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
 
         int id = (int) view.getTag();
 
-        Log.d("ID", id + "");
 
         Intent intent = new Intent (this, CardInfoActivity.class);
         intent.putExtra("ID", id);
