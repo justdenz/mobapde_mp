@@ -165,7 +165,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			quiz.setSubject(cursor.getString(2));
 			quiz.setDescription(cursor.getString(3));
 			quiz.setDate_created(convertStringToDate(cursor.getString(4)));
-			quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quizID));
+			quiz.setDeck((ArrayList<Flashcard>) getFlashcardsByQuizID(quiz.getQuizID()));
 		}
 
 		return quiz;
@@ -218,6 +218,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return -1;
 	}
+
+	public float getHighscoreByQuizID (int quizID) {
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query  = "SELECT MAX(" +Util.RECORD_KEY_SCOREPERCENTAGE+") FROM "+Util.RECORD_TABLE_NAME + " WHERE " + Util.QUIZ_KEY_ID + " = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(quizID)});
+
+
+		if (cursor.moveToFirst()) {
+			return Float.parseFloat(cursor.getString(0));
+		}
+
+		return 0;
+
+	}
+
 
 
 
