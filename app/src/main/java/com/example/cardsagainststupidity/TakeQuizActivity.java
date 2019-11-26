@@ -11,11 +11,13 @@ import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
 import com.example.cardsagainststupidity.fragments.TakeQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.TakeQuizInfoFragment;
+import com.example.cardsagainststupidity.fragments.TakeQuizScoreFragment;
 
 public class TakeQuizActivity extends AppCompatActivity {
 
     private TakeQuizInfoFragment takeQuizInfoFragment;
     private TakeQuizCardsFragment takeQuizCardsFragment;
+    private TakeQuizScoreFragment takeQuizScoreFragment;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private DatabaseHandler databaseHandler;
@@ -30,6 +32,7 @@ public class TakeQuizActivity extends AppCompatActivity {
         int quizID = intent.getIntExtra("QUIZ",-1);
         takeQuizInfoFragment = new TakeQuizInfoFragment();
         takeQuizCardsFragment = new TakeQuizCardsFragment();
+        takeQuizScoreFragment = new TakeQuizScoreFragment();
         currentQuiz = databaseHandler.getQuiz(quizID);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
