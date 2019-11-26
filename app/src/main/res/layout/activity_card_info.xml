@@ -22,17 +22,16 @@
         android:layout_height="match_parent">
 
 
-
         <TextView
             android:id="@+id/titleTxtView"
-            android:layout_width="335dp"
+            android:layout_width="297dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="18dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="46dp"
             android:fontFamily="sans-serif"
             android:text="Sample Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -122,6 +121,23 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Decemember 06, 2019"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="47dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="1dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:onClick="deleteQuiz"
+            app:backgroundTint="#FFFFFF"
+            app:icon="@drawable/ic_delete"
+            app:iconPadding="0dp"
+            app:iconTint="#000000" />
 
 
     </RelativeLayout>

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,6 +36,8 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
         this.quizzes1 = quizzes;
         sortByDate();
     }
+
+
 
 
 
@@ -129,6 +132,12 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             }
         };
 
+    }
+
+    public void refresh(ArrayList<Quiz> quizzes) {
+        this.quizzes = quizzes;
+        this.quizzes1 = quizzes;
+        sortByDate();
     }
 
     public void sortByDate() {

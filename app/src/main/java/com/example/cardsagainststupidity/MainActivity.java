@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    static final int MODIFY_QUIZ = 1;
 
     ArrayList<Quiz> quizzes;
     RecyclerView recyclerView;
@@ -46,6 +47,21 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
 
     }
+
+    @Override
+    public  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode,data);
+
+        if (requestCode == MODIFY_QUIZ){
+            if (resultCode == RESULT_OK){
+                quizCardAdapter.refresh(databaseHandler.getAllQuizzes());
+            }
+        }
+    }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,13 +127,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewCard(View view) {
 
-
         int id = (int) view.getTag();
-
 
         Intent intent = new Intent (this, CardInfoActivity.class);
         intent.putExtra("ID", id);
-        startActivity(intent);
-
+        startActivityForResult(intent, MODIFY_QUIZ);
     }
 }

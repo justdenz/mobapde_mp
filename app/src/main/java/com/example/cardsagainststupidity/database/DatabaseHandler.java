@@ -237,7 +237,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-	//Delete single quiz
+	//DeleteAlertFragment single quiz
 	public void deleteQuiz(int quizID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
