@@ -342,7 +342,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Date date = null;
 		try {
 			date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(d);
-			
+
 			return date;
 		} catch (ParseException e) {
 			e.printStackTrace();

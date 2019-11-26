@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -124,10 +122,6 @@ public class MainActivity extends AppCompatActivity {
     public void viewStats(MenuItem item) {
         Intent intent = new Intent(this, StatsActivity.class);
         startActivity(intent);
-    }
-
-    public DatabaseHandler getDatabaseHandler () {
-        return this.databaseHandler;
     }
 
 

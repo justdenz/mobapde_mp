@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -10,6 +10,10 @@
         <item name="colorAccent">#000000</item>
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">#FFFFFF</item>
     </style>
 
 

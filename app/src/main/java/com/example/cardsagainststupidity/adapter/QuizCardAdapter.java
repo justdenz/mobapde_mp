@@ -103,7 +103,9 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
 
             switch (view.getId()) {
                 case R.id.moreBtn: //creating a popup menu
-                    PopupMenu popup = new PopupMenu(context, this.moreBtn);
+
+
+                    PopupMenu popup = new PopupMenu(context, this.moreBtn, 0, R.style.PopupMenu, 0);
                     //inflating menu from xml resource
                     popup.inflate(R.menu.more_menu);
                     //adding click listener
