@@ -87,9 +87,9 @@ public class EditQuizActivity extends AppCompatActivity {
 		this.quiz.setDeck(deck);
 		databaseHandler = new DatabaseHandler(this);
 		databaseHandler.updateQuiz(quiz);
-		finishAffinity();
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
+		Intent returnIntent = new Intent();
+		setResult(MainActivity.RESULT_OK, returnIntent);
+		finish();
 	}
 
 }

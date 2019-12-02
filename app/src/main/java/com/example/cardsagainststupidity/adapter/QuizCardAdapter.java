@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -105,21 +105,24 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
                 case R.id.moreBtn: //creating a popup menu
 
 
-                    PopupMenu popup = new PopupMenu(context, this.moreBtn, 0, R.style.PopupMenu, 0);
+                    PopupMenu popup = new PopupMenu(context, this.moreBtn, 0);
                     //inflating menu from xml resource
                     popup.inflate(R.menu.more_menu);
                     //adding click listener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
+                            MainActivity activity = (MainActivity) context;
                             switch (item.getItemId()) {
                                 case R.id.edit:
+                                    activity.editQuiz(quizzes.get(position).getQuizID());
+
 
                                     //handle menu1 click
                                     break;
                                 case R.id.delete:
-                                    MainActivity activity = (MainActivity) context;
-                                    activity.deleteQuiz(quizzes.get(position).getQuizID(), position);
+
+                                    activity.deleteQuiz(quizzes.get(position).getQuizID());
                                     break;
 
                             }

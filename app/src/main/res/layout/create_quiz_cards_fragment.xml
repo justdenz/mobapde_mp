@@ -145,8 +145,9 @@
             android:textColor="#000000"
             app:backgroundTint="#FFFFFF"
             app:icon="@drawable/ic_arrow_back_ios_24px"
-            app:iconTint="#000000" />
-            app:iconTint="#000000" />
+            app:iconTint="#000000"
+            app:strokeColor="#000000"
+            app:strokeWidth="0.5dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/publishBtn"

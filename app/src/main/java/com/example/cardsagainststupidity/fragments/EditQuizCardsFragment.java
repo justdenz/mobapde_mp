@@ -66,7 +66,7 @@ public class EditQuizCardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 goPrevCard();
-                nextCardBtn.setBackgroundResource(R.drawable.next_button);
+                nextCardBtn.setBackgroundResource(R.drawable.ic_right);
 
                 if(CURRENT_CARD == 1){
                     backCardBtn.setVisibility(View.INVISIBLE);
@@ -76,18 +76,18 @@ public class EditQuizCardsFragment extends Fragment {
 
 
         nextCardBtn = view.findViewById(R.id.nextCardBtn);
-        nextCardBtn.setBackgroundResource(R.drawable.add_button);
+        nextCardBtn.setBackgroundResource(R.drawable.ic_add_circular_outlined_button);
         nextCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(CURRENT_CARD == flashcards.size()) {
-                    nextCardBtn.setBackgroundResource(R.drawable.add_button);
+                    nextCardBtn.setBackgroundResource(R.drawable.ic_add_circular_outlined_button);
                     addCard();
                     backCardBtn.setVisibility(View.VISIBLE);
                 }else{
                     goNextCard();
                     if (CURRENT_CARD == flashcards.size()){
-                        nextCardBtn.setBackgroundResource(R.drawable.add_button);
+                        nextCardBtn.setBackgroundResource(R.drawable.ic_add_circular_outlined_button);
                     }
                     backCardBtn.setVisibility(View.VISIBLE);
                 }

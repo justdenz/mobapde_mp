@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, MODIFY_QUIZ);
     }
 
-    public void deleteQuiz(final int quizID, final int position) {
+    public void deleteQuiz(final int quizID) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         builder.setTitle("Delete Quiz");
@@ -157,5 +157,13 @@ public class MainActivity extends AppCompatActivity {
 
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorDelete));
         alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorCancel));
+    }
+
+    public void editQuiz(int quizID) {
+
+       Intent intent = new Intent(this, EditQuizActivity.class);
+       intent.putExtra("QUIZ_ID", quizID);
+       startActivityForResult(intent, MODIFY_QUIZ);
+
     }
 }
