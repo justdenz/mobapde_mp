@@ -87,10 +87,10 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/descriptionTxtView"
+            android:layout_below="@+id/secondsInput"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="188dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="-4dp"
+            android:layout_marginEnd="4dp"
             android:text="Take Quiz"
             app:icon="@drawable/ic_play_arrow" />
 
@@ -138,6 +138,61 @@
             app:icon="@drawable/ic_delete"
             app:iconPadding="0dp"
             app:iconTint="#000000" />
+
+        <EditText
+            android:id="@+id/secondsInput"
+            android:layout_width="43dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionTxtView"
+            android:layout_marginTop="149dp"
+            android:layout_marginEnd="4dp"
+            android:layout_toStartOf="@+id/textView2"
+            android:backgroundTint="#000000"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHighlight="#000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionTxtView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="163dp"
+            android:layout_marginEnd="11dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="seconds"
+            android:textColor="#000000" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionTxtView"
+            android:layout_marginTop="160dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/secondsInput"
+            app:srcCompat="@drawable/ic_timer" />
+
+        <TextView
+            android:id="@+id/mark"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/descriptionTxtView"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:layout_marginStart="122dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="122dp"
+            android:background="@drawable/rounded_textview"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="100%"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
