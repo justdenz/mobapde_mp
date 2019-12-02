@@ -10,12 +10,12 @@
     </string-array>
 
     <string-array name="timer_values">
-        <item>none</item>
-        <item>3secs</item>
-        <item>5secs</item>
-        <item>10secs</item>
-        <item>15secs</item>
-        <item>30secs</item>
+        <item>0</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
 
     </string-array>
 </resources>

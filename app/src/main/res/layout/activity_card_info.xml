@@ -93,6 +93,7 @@
             android:layout_marginTop="-4dp"
             android:layout_marginEnd="4dp"
             android:text="Take Quiz"
+            android:onClick="takeQuiz"
             app:icon="@drawable/ic_play_arrow" />
 
         <TextView

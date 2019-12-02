@@ -31,13 +31,13 @@ public class TakeQuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_quiz);
         databaseHandler = new DatabaseHandler(this);
         Intent intent = getIntent();
-        int quizID = intent.getIntExtra("QUIZ",-1);
+        int quizID = intent.getIntExtra("QUIZ_ID",-1);
         takeQuizTimerFragment = new TakeQuizTimerFragment();
         takeQuizCardsFragment = new TakeQuizCardsFragment();
         takeQuizScoreFragment = new TakeQuizScoreFragment();
         currentQuiz = databaseHandler.getQuiz(quizID);
         fragmentManager = getSupportFragmentManager();
-        fragmentTransaction.add(R.id.frame_container, takeQuizTimerFragment, "TAKE_QUIZ_INFO");
+        fragmentTransaction.add(R.id.frame_container, takeQuizCardsFragment, "TAKE_QUIZ_CARDS");
         fragmentTransaction.addToBackStack("TAKE_QUIZ_INFO");
         fragmentTransaction.commit();
     }

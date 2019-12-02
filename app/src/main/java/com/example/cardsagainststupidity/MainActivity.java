@@ -2,12 +2,14 @@ package com.example.cardsagainststupidity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.cardsagainststupidity.Model.Quiz;
@@ -30,11 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     static final int MODIFY_QUIZ = 1;
+    static final int TAKE_QUIZ = 2;
 
     ArrayList<Quiz> quizzes;
     RecyclerView recyclerView;
     QuizCardAdapter quizCardAdapter;
     DatabaseHandler databaseHandler;
+    SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
         quizzes = databaseHandler.getAllQuizzes();
 
         initRecyclerView();
+
+        sharedPref = PreferenceManager
+                .getDefaultSharedPreferences(this);
+//        String marketPref = sharedPref
+//                .getString("timer_count", "-1");
+
 
     }
 

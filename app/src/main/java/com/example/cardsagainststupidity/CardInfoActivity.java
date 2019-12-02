@@ -1,14 +1,17 @@
 package com.example.cardsagainststupidity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import java.util.Objects;
 
 import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
 import static com.example.cardsagainststupidity.MainActivity.MODIFY_QUIZ;
+import static com.example.cardsagainststupidity.MainActivity.TAKE_QUIZ;
 
 
 public class CardInfoActivity extends AppCompatActivity {
@@ -29,6 +33,8 @@ public class CardInfoActivity extends AppCompatActivity {
 	TextView titleTxtView, subjectTxtView, descriptionTxtView, dateTxtView, nFlashcardsTxtView;
 	Button editBtn, takeQuizBtn;
 	SimpleDateFormat formatter;
+	EditText secondsInput;
+	SharedPreferences sharedPref;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,8 @@ public class CardInfoActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 		int id = getIntent().getIntExtra("ID", -1);
+		sharedPref = PreferenceManager
+				.getDefaultSharedPreferences(this);
 
 
 		databaseHandler = new DatabaseHandler(this);
@@ -50,6 +58,7 @@ public class CardInfoActivity extends AppCompatActivity {
 		dateTxtView = findViewById(R.id.dateTxtView);
 		editBtn = findViewById(R.id.editBtn);
 		takeQuizBtn = findViewById(R.id.takeQuizBtn);
+		secondsInput = findViewById(R.id.secondsInput);
 
 		//float highscore = databaseHandler.getHighscoreByQuizID(id);
 
@@ -60,6 +69,7 @@ public class CardInfoActivity extends AppCompatActivity {
 		descriptionTxtView.setText(quiz.getDescription());
 		dateTxtView.setText(formatter.format(quiz.getDate_created()));
 		nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
+		secondsInput.setText(sharedPref.getString("timer_count", "0"));
 
 	}
 
@@ -81,6 +91,13 @@ public class CardInfoActivity extends AppCompatActivity {
 				descriptionTxtView.setText(quiz.getDescription());
 				dateTxtView.setText(formatter.format(quiz.getDate_created()));
 				nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
+
+			}
+		}
+		else if (requestCode == TAKE_QUIZ) {
+			if (resultCode == RESULT_OK) {
+				quiz = databaseHandler.getQuiz(quiz.getQuizID());
+
 
 			}
 		}
@@ -119,5 +136,11 @@ public class CardInfoActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, EditQuizActivity.class);
 		intent.putExtra("QUIZ_ID", quiz.getQuizID());
 		startActivityForResult(intent, MODIFY_QUIZ);
+	}
+
+	public void takeQuiz(View view) {
+		Intent intent = new Intent(this, TakeQuizActivity.class);
+		intent.putExtra("QUIZ_ID", quiz.getQuizID());
+		startActivityForResult(intent, TAKE_QUIZ);
 	}
 }
