@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.Model.Statistics;
 import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
@@ -25,7 +26,7 @@ public class StatsActivity extends AppCompatActivity {
 	DatabaseHandler databaseHandler;
 	TextView averageDurationTxtView, averageScoreTxtView, totalQuizzesTxtView;
 
-
+//	Statistics s;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +43,20 @@ public class StatsActivity extends AppCompatActivity {
 		averageDurationTxtView.setText("" + stats.getAverageQuizTime());
 		averageScoreTxtView.setText("" + stats.getAverageQuizPercentage());
 		totalQuizzesTxtView.setText("" + stats.getTotalQuizzesTaken());
+
+//		Quiz q = new Quiz();
+//		q.setQuizID(1);
+//		q.setTitle("TEST");
+//
+//		QuizRecord r = new QuizRecord();
+//		r.setQuiz(q);
+//
+//		ArrayList<QuizRecord> history = new ArrayList<>();
+//		history.add(r);
+//
+//		s = new Statistics();
+//		s.setHistory(history);
+
 
 		initRecyclerView();
 	}
