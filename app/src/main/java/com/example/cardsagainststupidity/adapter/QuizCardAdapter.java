@@ -161,7 +161,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
 
                     for (Quiz data : quizzes1){
 
-                        if (data.getTitle().toLowerCase().contains(charString) || data.getSubject().toLowerCase().contains(charString)){
+                        if (data.getTitle().toLowerCase().contains(charString.toLowerCase()) || data.getSubject().toLowerCase().contains(charString.toLowerCase())){
                             filterList.add(data);
                         }
                     }

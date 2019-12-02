@@ -166,4 +166,9 @@ public class MainActivity extends AppCompatActivity {
        startActivityForResult(intent, MODIFY_QUIZ);
 
     }
+
+    public void viewSettings(MenuItem item) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 }

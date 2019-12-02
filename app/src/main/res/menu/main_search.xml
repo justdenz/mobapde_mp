@@ -32,12 +32,21 @@
         </menu>
 
 
+
     </item>
 
 
     <item
-        android:id="@+id/main_stats"
-        android:onClick="viewStats"
-        android:title="Statistics"
+    android:id="@+id/main_stats"
+    android:onClick="viewStats"
+    android:title="Statistics"
+    app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/settings"
+        android:onClick="viewSettings"
+        android:title="Settings"
         app:showAsAction="collapseActionView" />
+
+
 </menu>

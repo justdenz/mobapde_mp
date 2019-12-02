@@ -1,0 +1,21 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="timer_entries">
+        <item>No Timer</item>
+        <item>3 Seconds</item>
+        <item>5 Seconds</item>
+        <item>10 Seconds</item>
+        <item>15 Seconds</item>
+        <item>30 Seconds</item>
+    </string-array>
+
+    <string-array name="timer_values">
+        <item>none</item>
+        <item>3secs</item>
+        <item>5secs</item>
+        <item>10secs</item>
+        <item>15secs</item>
+        <item>30secs</item>
+
+    </string-array>
+</resources>
