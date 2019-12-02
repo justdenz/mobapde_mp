@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //to reset db
-//        this.deleteDatabase(Util.DATABASE_NAME);
+
         databaseHandler = new DatabaseHandler(this);
 
         quizzes = databaseHandler.getAllQuizzes();

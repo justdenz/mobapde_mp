@@ -30,7 +30,7 @@ public class Statistics {
 		return history.size();
 	}
 
-	public float averageQuizPercentage () {
+	public float getAverageQuizPercentage () {
 
 		float totalPercent = 0;
 
@@ -38,15 +38,25 @@ public class Statistics {
 			totalPercent += r.getScorePercentage();
 		}
 
+		if (totalPercent <= 0) {
+			return 0;
+		}
+
 		return totalPercent / history.size();
 	}
 
-	public float averageQuizTime() {
+	public float getAverageQuizTime() {
 
 		float totalTime = 0;
 
+
+
 		for (QuizRecord r : history) {
 			totalTime += r.getDuration();
+		}
+
+		if (totalTime <= 0) {
+			return 0;
 		}
 
 		return totalTime / history.size();

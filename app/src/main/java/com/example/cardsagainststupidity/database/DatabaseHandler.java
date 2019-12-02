@@ -127,7 +127,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// FROM cas_db.records, cas_db.quizzes WHERE quizzes.quiz_id  = records.quiz_id
 		String selectAll = "SELECT " + recordID + ", "  + quizzesQuizID + ", " + title + ", " + score + ", " + duration + ", " + date_taken +
 				" FROM " + Util.RECORD_TABLE_NAME + ", "+ Util.QUIZ_TABLE_NAME +
-				" WHERE " + quizzesQuizID + " = " + recordsQuizID;
+				" WHERE " + quizzesQuizID + " = " + recordsQuizID +
+				" ORDER BY " + recordID + " DESC;";
 
 		Cursor cursor = db.rawQuery(selectAll, null);
 
@@ -235,6 +236,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return 0;
 
+	}
+
+	public int getTotalQuizzesTaken() {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String query = "SELECT COUNT(*) FROM " + Util.RECORD_TABLE_NAME;
+		Cursor cursor = db.rawQuery(query, null);
+
+		if (cursor.moveToFirst()) {
+			return Integer.parseInt(cursor.getString(0));
+		}
+
+		return 0;
 	}
 
 

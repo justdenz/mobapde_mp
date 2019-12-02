@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/quizCard"
+    android:id="@+id/historyItem"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:layout_gravity="center"
@@ -33,7 +33,7 @@
             android:textStyle="bold"></TextView>
 
         <TextView
-            android:id="@+id/nFlashcardsTxtView"
+            android:id="@+id/scorePercentageTxtView"
             android:layout_width="49dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -56,12 +56,13 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="-5dp"
+            android:onClick="takeQuiz"
             android:text="RETAKE"
             android:textSize="12sp"
             app:icon="@null" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/dateTakenTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleTxtView"
@@ -70,7 +71,7 @@
             android:text="Taken on December 05, 2019" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/durationTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
