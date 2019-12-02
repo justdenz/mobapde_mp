@@ -1,11 +1,14 @@
 package com.example.cardsagainststupidity.Model;
 
+import java.util.Date;
+
 public class QuizRecord {
 
 	private int recordID;
 	private Quiz quiz;
 	private float scorePercentage;
 	private int duration;
+	private Date date_taken;
 
 	public QuizRecord () {
 		quiz = new Quiz();
@@ -27,6 +30,14 @@ public class QuizRecord {
 		quiz.setTitle(title);
 	}
 
+
+	public Date getDate_taken() {
+		return date_taken;
+	}
+
+	public void setDate_taken(Date date_taken) {
+		this.date_taken = date_taken;
+	}
 
 	public Quiz getQuiz() {
 		return quiz;

@@ -25,4 +25,5 @@ public class Util {
 	public static final String RECORD_KEY_ID = "record_id";
 	public static final String RECORD_KEY_SCOREPERCENTAGE = "score_percentage";
 	public static final String RECORD_KEY_DURATION = "duration";
+	public static final String RECORD_DATE_TAKEN = "date_taken";
 }

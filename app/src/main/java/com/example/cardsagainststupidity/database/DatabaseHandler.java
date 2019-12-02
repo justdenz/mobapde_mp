@@ -56,7 +56,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ Util.RECORD_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ Util.QUIZ_KEY_ID + " INTEGER,"
 				+ Util.RECORD_KEY_SCOREPERCENTAGE + " REAL,"
-				+ Util.RECORD_KEY_DURATION + " TEXT"
+				+ Util.RECORD_KEY_DURATION + " TEXT,"
+				+ Util.RECORD_DATE_TAKEN + " TEXT"
 				+ ");";
 
 		db.execSQL(CREATE_QUIZ_TABLE);
@@ -108,7 +109,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public Statistics getStatistics () {
 
 
-
 		ArrayList<QuizRecord> recordList = new ArrayList<>();
 
 
@@ -120,11 +120,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		String duration = Util.RECORD_TABLE_NAME + "." + Util.RECORD_KEY_DURATION;
 		String quizzesQuizID = Util.QUIZ_TABLE_NAME + "." + Util.QUIZ_KEY_ID;
 		String recordsQuizID = Util.RECORD_TABLE_NAME + "." + Util.QUIZ_KEY_ID;
+		String date_taken = Util.RECORD_TABLE_NAME + "." + Util.RECORD_DATE_TAKEN;
 
 
 		//SELECT records.record_id, quizzes.quiz_id, quizzes.title,  records.score_percentage, records.duration
 		// FROM cas_db.records, cas_db.quizzes WHERE quizzes.quiz_id  = records.quiz_id
-		String selectAll = "SELECT " + recordID + ", "  + quizzesQuizID + ", " + title + ", " + score + ", " + duration +
+		String selectAll = "SELECT " + recordID + ", "  + quizzesQuizID + ", " + title + ", " + score + ", " + duration + ", " + date_taken +
 				" FROM " + Util.RECORD_TABLE_NAME + ", "+ Util.QUIZ_TABLE_NAME +
 				" WHERE " + quizzesQuizID + " = " + recordsQuizID;
 
@@ -140,6 +141,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				record.setQuizTitle(cursor.getString(2));
 				record.setScorePercentage(Float.parseFloat(cursor.getString(3)));
 				record.setDuration(Integer.parseInt(cursor.getString(4)));
+				record.setDate_taken(convertStringToDate(cursor.getString(5)));
 
 				//add record objects to our list
 				recordList.add(record);
@@ -257,6 +259,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(Util.QUIZ_KEY_ID, r.getQuiz().getQuizID());
 		values.put(Util.RECORD_KEY_SCOREPERCENTAGE, r.getScorePercentage());
 		values.put(Util.RECORD_KEY_DURATION, r.getDuration());
+		values.put(Util.RECORD_DATE_TAKEN, getDateToString());
 
 		// Insert to row
 		db.insert(Util.RECORD_TABLE_NAME,  null, values);

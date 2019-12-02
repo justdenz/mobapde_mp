@@ -12,11 +12,6 @@
     <!-- Main content -->
 
 
-    <com.google.android.material.textfield.TextInputLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Sort by" />
 
 
     <androidx.recyclerview.widget.RecyclerView
