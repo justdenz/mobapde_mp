@@ -18,6 +18,8 @@ import com.example.cardsagainststupidity.fragments.EditQuizInfoFragment;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.cardsagainststupidity.MainActivity.MODIFY_QUIZ;
+
 public class EditQuizActivity extends AppCompatActivity {
 
 	private EditQuizInfoFragment editQuizInfoFragment;
@@ -70,6 +72,8 @@ public class EditQuizActivity extends AppCompatActivity {
 		fragmentTransaction.commitAllowingStateLoss();
 		getSupportFragmentManager().executePendingTransactions();
 	}
+
+
 
 
 	public void updateQuizInfo(String title, String subject, String description){

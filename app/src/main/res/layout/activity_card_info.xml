@@ -74,6 +74,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="7dp"
+            android:onClick="editQuiz"
             android:text="Edit"
             android:textColor="#000000"
             app:backgroundTint="#FFFFFF"

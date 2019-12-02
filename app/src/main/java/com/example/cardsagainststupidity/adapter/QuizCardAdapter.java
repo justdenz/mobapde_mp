@@ -209,7 +209,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             public int compare(Quiz o1, Quiz o2) {
                 if (o1.getTitle() == null || o2.getTitle() == null)
                     return 0;
-                return o1.getTitle().compareTo(o2.getTitle());
+                return o1.getTitle().toLowerCase().compareTo(o2.getTitle().toLowerCase());
             }
         });
 
@@ -221,7 +221,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             public int compare(Quiz o1, Quiz o2) {
                 if (o1.getSubject() == null || o2.getSubject() == null)
                     return 0;
-                return o1.getSubject().compareTo(o2.getSubject());
+                return o1.getSubject().toLowerCase().compareTo(o2.getSubject().toLowerCase());
             }
         });
 

@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
+import static com.example.cardsagainststupidity.MainActivity.MODIFY_QUIZ;
+
 
 public class CardInfoActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class CardInfoActivity extends AppCompatActivity {
 	DatabaseHandler databaseHandler;
 	TextView titleTxtView, subjectTxtView, descriptionTxtView, dateTxtView, nFlashcardsTxtView;
 	Button editBtn, takeQuizBtn;
+	SimpleDateFormat formatter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class CardInfoActivity extends AppCompatActivity {
 
 		//float highscore = databaseHandler.getHighscoreByQuizID(id);
 
-		SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
+		formatter = new SimpleDateFormat("MMMM dd, yyyy");
 
 		titleTxtView.setText(quiz.getTitle());
 		subjectTxtView.setText(quiz.getSubject());
@@ -58,6 +61,29 @@ public class CardInfoActivity extends AppCompatActivity {
 		dateTxtView.setText(formatter.format(quiz.getDate_created()));
 		nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
 
+	}
+
+	@Override
+	public  void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode,data);
+
+		if (requestCode == MODIFY_QUIZ){
+			if (resultCode == RESULT_OK){
+				quiz = databaseHandler.getQuiz(quiz.getQuizID());
+
+
+				//float highscore = databaseHandler.getHighscoreByQuizID(id);
+
+				formatter = new SimpleDateFormat("MMMM dd, yyyy");
+
+				titleTxtView.setText(quiz.getTitle());
+				subjectTxtView.setText(quiz.getSubject());
+				descriptionTxtView.setText(quiz.getDescription());
+				dateTxtView.setText(formatter.format(quiz.getDate_created()));
+				nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
+
+			}
+		}
 	}
 
 	public void deleteQuiz(View view) {
@@ -87,5 +113,11 @@ public class CardInfoActivity extends AppCompatActivity {
 		alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorCancel));
 
 
+	}
+
+	public void editQuiz(View view) {
+		Intent intent = new Intent(this, EditQuizActivity.class);
+		intent.putExtra("QUIZ_ID", quiz.getQuizID());
+		startActivityForResult(intent, MODIFY_QUIZ);
 	}
 }
