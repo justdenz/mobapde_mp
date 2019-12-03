@@ -51,20 +51,24 @@ public class TakeQuizActivity extends AppCompatActivity {
     }
 
 
-    public void setRecord(int nCorrect, int duration) {
+    public void saveRecord(int nCorrect, int duration) {
         record = new QuizRecord();
 
         record.setDuration(duration);
-        record.setScorePercentage(nCorrect / quiz.getDeck().size());
+        record.setScorePercentage(nCorrect*100 / quiz.getDeck().size());
         record.setQuiz(this.quiz);
     }
 
-    public void endGame(View view) {
+    public void endGame() {
+
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_CARDS"));
-        fragmentTransaction.add(R.id.frame_container, new TakeQuizScoreFragment(new QuizRecord()), "TAKE_QUIZ_INFO_SCORE");
+        fragmentTransaction.add(R.id.frame_container, new TakeQuizScoreFragment(this.record), "TAKE_QUIZ_INFO_SCORE");
         fragmentTransaction.commit();
     }
+
+
 
 
 

@@ -139,9 +139,19 @@ public class CardInfoActivity extends AppCompatActivity {
 	}
 
 	public void takeQuiz(View view) {
+
+		int timer;
+
+		if (secondsInput.getText().toString().equals("")) {
+			timer = Integer.parseInt(sharedPref.getString("timer_count", "0"));
+		}
+		else {
+			timer = Integer.parseInt(secondsInput.getText().toString());
+		}
+
 		Intent intent = new Intent(this, TakeQuizActivity.class);
 		intent.putExtra("QUIZ_ID", quiz.getQuizID());
-		intent.putExtra("TIMER_COUNT", Integer.parseInt(secondsInput.getText().toString()));
+		intent.putExtra("TIMER_COUNT", timer);
 		startActivityForResult(intent, TAKE_QUIZ);
 	}
 }

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,9 @@ import android.widget.Toast;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
+import com.example.cardsagainststupidity.Model.Stopwatch;
 import com.example.cardsagainststupidity.R;
+import com.example.cardsagainststupidity.TakeQuizActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class TakeQuizCardsFragment extends Fragment {
     private MyCountDownTimer timer;
     private int current;
     private int nCorrect;
+    private Stopwatch stopwatch;
     private Flashcard currentFlashcard;
 
 
@@ -88,9 +92,9 @@ public class TakeQuizCardsFragment extends Fragment {
             public void onClick(View v) {
 
                 if (game_proper) {
-
-                    setNextQuestion();
                     nCorrect++;
+                    setNextQuestion();
+
 
                 }
 
@@ -138,7 +142,7 @@ public class TakeQuizCardsFragment extends Fragment {
         nCorrect = 0;
         current = -1;
         this.skipped = new ArrayList<>();
-
+        stopwatch = new Stopwatch();
         startTimer(WARM_UP_SECONDS);
     }
 
@@ -178,8 +182,12 @@ public class TakeQuizCardsFragment extends Fragment {
 
         }
         else {
-
+            Log.d("TEST", nCorrect+"");
+            Log.d("TIME", ((int) stopwatch.getElapsedTimeSecs() + ""));
+            ((TakeQuizActivity) getContext()).saveRecord(nCorrect, (int) stopwatch.getElapsedTimeSecs());
+            ((TakeQuizActivity) getContext()).endGame();
             txtFlashcardNum.setText("Game Over!");
+            stopwatch.stop();
         }
 
 
@@ -212,6 +220,7 @@ public class TakeQuizCardsFragment extends Fragment {
             }
             else {
                 txtFlashcardNum.setText("Quiz begins in " + progress);
+                stopwatch.start();
             }
             progressBar.setProgress(progress);
         }

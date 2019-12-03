@@ -18,13 +18,15 @@ import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.R;
 import com.google.android.material.button.MaterialButton;
 
+import java.text.DecimalFormat;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TakeQuizScoreFragment extends Fragment {
 
 
-    TextView txtQuizTitle, txtScore, txtHighscore;
+    TextView txtQuizTitle, txtScore, txtHighscore, txtDuration;
     MaterialButton btnRetake, btnFinish;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -53,8 +55,15 @@ public class TakeQuizScoreFragment extends Fragment {
         txtQuizTitle = view.findViewById(R.id.txtQuizTitle);
         txtHighscore = view.findViewById(R.id.txtHighscore);
         txtScore = view.findViewById(R.id.txtScore);
+        txtDuration = view.findViewById(R.id.txtDuration);
         btnFinish = view.findViewById(R.id.btnFinish);
         btnRetake = view.findViewById(R.id.btnRetake);
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        txtScore.setText(df.format(record.getScorePercentage()) + "%");
+        txtQuizTitle.setText(record.getQuiz().getTitle());
+        txtDuration.setText("Duration: " + record.getDuration() + " seconds");
+
         return view;
     }
 
