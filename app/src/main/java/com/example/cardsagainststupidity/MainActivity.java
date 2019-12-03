@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
                 quizCardAdapter.refresh(databaseHandler.getAllQuizzes());
             }
         }
+        else if (requestCode == TAKE_QUIZ) {
+            if (resultCode == RESULT_OK) {
+
+            }
+        }
     }
 
 
@@ -182,4 +187,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+	public void takeQuiz(int quizID) {
+        Intent intent = new Intent(this, TakeQuizActivity.class);
+        intent.putExtra("QUIZ_ID", quizID);
+        intent.putExtra("TIMER_COUNT", Integer.parseInt(sharedPref.getString("timer_count", "0")));
+        startActivityForResult(intent, TAKE_QUIZ);
+	}
 }

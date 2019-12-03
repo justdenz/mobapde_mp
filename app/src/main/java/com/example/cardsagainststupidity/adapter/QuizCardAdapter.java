@@ -91,6 +91,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
             moreBtn = itemView.findViewById(R.id.moreBtn);
 
             moreBtn.setOnClickListener(this);
+            takeQuizBtn.setOnClickListener(this);
         }
 
         @Override
@@ -130,7 +131,15 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.ViewHo
                     //displaying the popup
                     popup.show();
                     break;
+
+                case R.id.takeQuizBtn:
+                    MainActivity activity = (MainActivity) context;
+                    activity.takeQuiz(quizzes.get(position).getQuizID());
+                    break;
+
+
             }
+
 
         }
 

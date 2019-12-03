@@ -24,7 +24,7 @@ import com.google.android.material.button.MaterialButton;
 public class TakeQuizScoreFragment extends Fragment {
 
 
-    TextView txtQuizTitle, txtSubject, txtQuizDescription, txtScore;
+    TextView txtQuizTitle, txtScore, txtHighscore;
     MaterialButton btnRetake, btnFinish;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -51,8 +51,7 @@ public class TakeQuizScoreFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_take_quiz_score, container, false);
 
         txtQuizTitle = view.findViewById(R.id.txtQuizTitle);
-        txtSubject = view.findViewById(R.id.txtSubject);
-        txtQuizDescription = view.findViewById(R.id.txtQuizDescription);
+        txtHighscore = view.findViewById(R.id.txtHighscore);
         txtScore = view.findViewById(R.id.txtScore);
         btnFinish = view.findViewById(R.id.btnFinish);
         btnRetake = view.findViewById(R.id.btnRetake);

@@ -1,204 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/quizCard"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginLeft="7dp"
-    android:layout_marginTop="1dp"
-    android:layout_marginRight="7dp"
-    android:layout_marginBottom="0dp"
+    android:layout_height="match_parent"
     android:background="@color/colorGray"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="10dp"
-    app:contentPaddingTop="5dp">
+    android:gravity="center">
 
-    <RelativeLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/quizCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="0dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp"
+        app:contentPaddingTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/titleTxtView"
-            android:layout_width="288dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="55dp"
-            android:fontFamily="sans-serif"
-            android:text="Sample Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textColor="#000000"
-            android:textSize="34sp"
-            android:textStyle="bold"></TextView>
+            <TextView
+                android:id="@+id/titleTxtView"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="55dp"
+                android:fontFamily="sans-serif"
+                android:text="Sample Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="#000000"
+                android:textSize="34sp"
+                android:textStyle="bold"></TextView>
 
-        <TextView
-            android:id="@+id/subjectTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/titleTxtView"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="SUBJECT"
-            android:textSize="19sp"></TextView>
+            <TextView
+                android:id="@+id/subjectTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTxtView"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="SUBJECT"
+                android:textSize="19sp"></TextView>
 
-        <TextView
-            android:id="@+id/nFlashcardsTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/descriptionTxtView"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="154dp"
-            android:gravity="bottom"
-            android:text="0 Flashcards"
-            android:textColor="#000000"
-            android:textSize="19sp"
-            android:textStyle="bold"></TextView>
+            <TextView
+                android:id="@+id/nFlashcardsTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descriptionTxtView"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="154dp"
+                android:gravity="bottom"
+                android:text="0 Flashcards"
+                android:textColor="#000000"
+                android:textSize="19sp"
+                android:textStyle="bold"></TextView>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/editBtn"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nFlashcardsTxtView"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="7dp"
-            android:onClick="editQuiz"
-            android:text="Edit"
-            android:textColor="#000000"
-            app:backgroundTint="#FFFFFF"
-            app:icon="@drawable/ic_edit"
-            app:iconTint="#F2000000"
-            app:strokeColor="#000000"
-            app:strokeWidth="0.5dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editBtn"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nFlashcardsTxtView"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                android:onClick="editQuiz"
+                android:text="Edit"
+                android:textColor="#000000"
+                app:backgroundTint="#FFFFFF"
+                app:icon="@drawable/ic_edit"
+                app:iconTint="#F2000000"
+                app:strokeColor="#000000"
+                app:strokeWidth="0.5dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/takeQuizBtn"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/secondsInput"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="-4dp"
-            android:layout_marginEnd="4dp"
-            android:text="Take Quiz"
-            android:onClick="takeQuiz"
-            app:icon="@drawable/ic_play_arrow" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/takeQuizBtn"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/secondsInput"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-4dp"
+                android:layout_marginEnd="4dp"
+                android:onClick="takeQuiz"
+                android:text="Take Quiz"
+                app:icon="@drawable/ic_play_arrow" />
 
-        <TextView
-            android:id="@+id/descriptionTxtView"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/dateTxtView"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="This is a sample description"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#626262"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/descriptionTxtView"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTxtView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="This is a sample description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#626262"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/dateTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/titleTxtView"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="7dp"
-            android:layout_toEndOf="@+id/subjectTxtView"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Decemember 06, 2019"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/dateTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTxtView"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/subjectTxtView"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Decemember 06, 2019"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/button"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="0dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:onClick="deleteQuiz"
-            app:backgroundTint="#FFFFFF"
-            app:icon="@drawable/ic_delete"
-            app:iconPadding="0dp"
-            app:iconTint="#555555" />
+            <Button
+                android:id="@+id/button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="deleteQuiz"
+                app:backgroundTint="#FFFFFF"
+                app:icon="@drawable/ic_delete"
+                app:iconPadding="0dp"
+                app:iconTint="#555555" />
 
-        <EditText
-            android:id="@+id/secondsInput"
-            android:layout_width="43dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/descriptionTxtView"
-            android:layout_marginTop="149dp"
-            android:layout_marginEnd="4dp"
-            android:layout_toStartOf="@+id/textView2"
-            android:backgroundTint="#000000"
-            android:cursorVisible="false"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textColorHighlight="#000000"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/secondsInput"
+                android:layout_width="43dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descriptionTxtView"
+                android:layout_marginTop="149dp"
+                android:layout_marginEnd="4dp"
+                android:layout_toStartOf="@+id/textView2"
+                android:backgroundTint="#000000"
+                android:cursorVisible="false"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textColorHighlight="#000000"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/descriptionTxtView"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="163dp"
-            android:layout_marginEnd="11dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="seconds"
-            android:textColor="#000000" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descriptionTxtView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="163dp"
+                android:layout_marginEnd="11dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="seconds"
+                android:textColor="#000000" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/descriptionTxtView"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@+id/secondsInput"
-            app:srcCompat="@drawable/ic_timer" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descriptionTxtView"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/secondsInput"
+                app:srcCompat="@drawable/ic_timer" />
 
-        <TextView
-            android:id="@+id/mark"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/descriptionTxtView"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentEnd="false"
-            android:layout_marginStart="122dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="122dp"
-            android:background="@drawable/rounded_textview"
-            android:fontFamily="sans-serif-condensed"
-            android:gravity="center"
-            android:text="100%"
-            android:textColor="#000000"
-            android:textSize="27sp"
-            android:textStyle="bold" />
-
-
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/mark"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/descriptionTxtView"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="false"
+                android:layout_marginStart="122dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="122dp"
+                android:background="@drawable/rounded_textview"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:text="100%"
+                android:textColor="#000000"
+                android:textSize="27sp"
+                android:textStyle="bold" />
 
 
-</com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+

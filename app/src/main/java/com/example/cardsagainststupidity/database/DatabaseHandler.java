@@ -238,21 +238,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	}
 
-	public int getTotalQuizzesTaken() {
-		SQLiteDatabase db = this.getReadableDatabase();
-
-		String query = "SELECT COUNT(*) FROM " + Util.RECORD_TABLE_NAME;
-		Cursor cursor = db.rawQuery(query, null);
-
-		if (cursor.moveToFirst()) {
-			return Integer.parseInt(cursor.getString(0));
-		}
-
-		return 0;
-	}
-
-
-
 
 	//DeleteAlertFragment single quiz
 	public void deleteQuiz(int quizID) {

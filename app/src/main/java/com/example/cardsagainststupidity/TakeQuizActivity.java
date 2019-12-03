@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.Model.QuizRecord;
@@ -23,6 +26,7 @@ public class TakeQuizActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private DatabaseHandler databaseHandler;
     Bundle bundle;
+    private int timerCount;
     private Quiz quiz;
     private QuizRecord record;
 
@@ -36,12 +40,13 @@ public class TakeQuizActivity extends AppCompatActivity {
         databaseHandler = new DatabaseHandler(this);
         bundle = getIntent().getExtras();
         quiz = databaseHandler.getQuiz(bundle.getInt("QUIZ_ID"));
+        timerCount = bundle.getInt("TIMER_COUNT");
 
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        fragmentTransaction.add(R.id.frame_container, new TakeQuizCardsFragment(quiz), "TAKE_QUIZ_CARDS");
+        fragmentTransaction.add(R.id.frame_container, new TakeQuizCardsFragment(quiz, timerCount), "TAKE_QUIZ_CARDS");
         fragmentTransaction.commit();
     }
 
@@ -61,37 +66,16 @@ public class TakeQuizActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    /*public void viewInfo(){
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.frame_container, takeQuizTimerFragment, "TAKE_QUIZ_INFO");
-        fragmentTransaction.addToBackStack("TAKE_QUIZ_INFO");
-        fragmentTransaction.commit();
-        /*if(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_CARD") == null) {
-            fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_INFO"));
-            fragmentTransaction.add(R.id.frame_container, takeQuizCardsFragment, "TAKE_QUIZ_CARD");
-            fragmentTransaction.commit();
-        } else{
-            takeQuizCardsFragment = (TakeQuizCardsFragment) getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_CARD");
-            fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_INFO"));
-            fragmentTransaction.attach(takeQuizCardsFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commitAllowingStateLoss();
-            getSupportFragmentManager().executePendingTransactions();
-        }
+
+
+
+
+	public void exitQuiz(View view) {
+	}
+
+    public void retakeQuiz(View view) {
     }
 
-    public void viewCards(){
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.frame_container, takeQuizCardsFragment, "TAKE_QUIZ_CARDS");
-        fragmentTransaction.addToBackStack("TAKE_QUIZ_CARDS");
-        fragmentTransaction.commit();
-    }
 
-    public void viewScore(){
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.frame_container, takeQuizScoreFragment, "TAKE_QUIZ_SCORE");
-        fragmentTransaction.addToBackStack("TAKE_QUIZ_INFO_SCORE");
-        fragmentTransaction.commit();
-    }*/
 
 }
