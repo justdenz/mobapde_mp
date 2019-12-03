@@ -42,7 +42,7 @@ public class TakeQuizCardsFragment extends Fragment {
 
     TextView txtFlashcardNum, txtQuestion, txtAnswer;
     ImageButton backBtn;
-    MaterialButton btnGuessed, btnCorrect;
+    MaterialButton btnGuessed, btnCorrect, btnSkip;
 
     private ArrayList<Flashcard> deck;
     private ArrayList<Flashcard> skipped;
@@ -53,6 +53,7 @@ public class TakeQuizCardsFragment extends Fragment {
     private MyCountDownTimer timer;
     private int current;
     private int nCorrect;
+    private Flashcard currentFlashcard;
 
 
 
@@ -69,7 +70,7 @@ public class TakeQuizCardsFragment extends Fragment {
 
     @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_take_quiz_cards, container, false);
@@ -77,6 +78,7 @@ public class TakeQuizCardsFragment extends Fragment {
         backBtn = view.findViewById(R.id.backBtn);
         btnGuessed = view.findViewById(R.id.btnGuessed);
         btnCorrect = view.findViewById(R.id.btnCorrect);
+        btnSkip = view.findViewById(R.id.btnSkip);
         progressBar = view.findViewById(R.id.progressBar);
         txtQuestion = view.findViewById(R.id.txtQuestion);
         txtAnswer = view.findViewById(R.id.txtAnswer);
@@ -86,8 +88,10 @@ public class TakeQuizCardsFragment extends Fragment {
             public void onClick(View v) {
 
                 if (game_proper) {
+
                     setNextQuestion();
                     nCorrect++;
+
                 }
 
             }
@@ -97,13 +101,32 @@ public class TakeQuizCardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (game_proper) {
+
                     setNextQuestion();
                 }
             }
 
         });
 
-        game_proper = false;
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (game_proper) {
+
+                    if (current < deck.size()) {
+                        skipped.add(currentFlashcard);
+                        setNextQuestion();
+                    }
+                    else {
+                        txtFlashcardNum.setText("You cannot skip twice!");
+                    }
+
+                    // if user skips, it will be added to the skipped array
+
+                }
+            }
+        });
+
 
         initQuiz();
 
@@ -111,9 +134,11 @@ public class TakeQuizCardsFragment extends Fragment {
     }
 
     private void initQuiz() {
+        game_proper = false;
         nCorrect = 0;
-        current = 0;
+        current = -1;
         this.skipped = new ArrayList<>();
+
         startTimer(WARM_UP_SECONDS);
     }
 
@@ -124,17 +149,49 @@ public class TakeQuizCardsFragment extends Fragment {
 
     private void setNextQuestion () {
 
+        current++;
+
+
         if (current < deck.size()) {
-            txtQuestion.setText(deck.get(current).getQuestion());
+
+            if (timer != null) {
+                timer.cancel();
+            }
+
+            currentFlashcard = deck.get(current);
+            txtQuestion.setText(currentFlashcard.getQuestion());
             txtFlashcardNum.setText("Flashcard " + (current+1) + "/" + deck.size());
             startTimer(timerCount);
         }
+        else if (skipped.size() > 0) {
+
+            if (timer != null) {
+                timer.cancel();
+            }
+
+            currentFlashcard = skipped.get(0);
+            skipped.remove(currentFlashcard);
+
+            txtFlashcardNum.setText("Last chance!");
+            txtQuestion.setText(currentFlashcard.getQuestion());
+            startTimer(timerCount);
+
+        }
+        else {
+
+            txtFlashcardNum.setText("Game Over!");
+        }
+
+
 
     }
 
 
 
     private void startTimer(int seconds) {
+
+
+
         timer = new MyCountDownTimer((seconds+1) * 1000, 1000);
         progressBar.setMax(seconds);
         timer.start();
@@ -162,8 +219,7 @@ public class TakeQuizCardsFragment extends Fragment {
         @Override
         public void onFinish () {
             if (game_proper) {
-                txtAnswer.setText(deck.get(current).getAnswer());
-                current++;
+                txtAnswer.setText(currentFlashcard.getAnswer());
             }
             else {
                 game_proper = true;

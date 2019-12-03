@@ -56,9 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
-            android:text="What is the question?"
+            android:text="Questions will appear here!"
             android:textColor="#FFFFFF"
-            android:textColorHint="@color/colorGray"
             android:textSize="18sp"
             android:textStyle="bold"
             app:boxBackgroundColor="@android:color/black">
@@ -88,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
-            android:text="This is the answer."
+            android:text="Answers will appear here!"
             android:textSize="18sp"
             android:textStyle="bold"
             app:boxBackgroundColor="@android:color/white">
@@ -101,7 +100,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -110,8 +108,8 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:text="Back"
+            android:layout_marginEnd="5dp"
+            android:text="I guessed"
             android:textColor="#000000"
             app:backgroundTint="#FFFFFF"
             app:icon="@drawable/ic_cancel"
@@ -123,11 +121,22 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:text="I knew it!"
             app:backgroundTint="#000000"
             app:icon="@drawable/ic_check" />
 
 
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSkip"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        android:textColor="#818181"
+        app:backgroundTint="#E6E6E6"
+        tools:text="Skip" />
 
 </LinearLayout>
