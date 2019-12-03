@@ -231,7 +231,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 		if (cursor.moveToFirst()) {
-			return Float.parseFloat(cursor.getString(0));
+			if (cursor.getString(0) != null) {
+				return Float.parseFloat(cursor.getString(0));
+			}
 		}
 
 		return 0;

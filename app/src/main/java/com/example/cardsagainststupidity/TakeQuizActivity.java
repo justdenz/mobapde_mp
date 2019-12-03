@@ -3,8 +3,11 @@ package com.example.cardsagainststupidity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -17,6 +20,8 @@ import com.example.cardsagainststupidity.fragments.TakeQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.TakeQuizScoreFragment;
 
 import java.util.Objects;
+
+import static com.example.cardsagainststupidity.MainActivity.TAKE_QUIZ;
 
 public class TakeQuizActivity extends AppCompatActivity {
 
@@ -37,10 +42,14 @@ public class TakeQuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
 
+
+
         databaseHandler = new DatabaseHandler(this);
         bundle = getIntent().getExtras();
         quiz = databaseHandler.getQuiz(bundle.getInt("QUIZ_ID"));
         timerCount = bundle.getInt("TIMER_COUNT");
+
+
 
 
         fragmentManager = getSupportFragmentManager();
@@ -61,7 +70,7 @@ public class TakeQuizActivity extends AppCompatActivity {
 
     public void endGame() {
 
-
+        databaseHandler.addRecord(this.record);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_CARDS"));
         fragmentTransaction.add(R.id.frame_container, new TakeQuizScoreFragment(this.record), "TAKE_QUIZ_INFO_SCORE");
@@ -69,12 +78,8 @@ public class TakeQuizActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-	public void exitQuiz(View view) {
+	public void exitQuiz() {
+        finish();
 	}
 
     public void retakeQuiz(View view) {

@@ -1,9 +1,12 @@
 package com.example.cardsagainststupidity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ import com.example.cardsagainststupidity.database.DatabaseHandler;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.cardsagainststupidity.MainActivity.TAKE_QUIZ;
+
 public class StatsActivity extends AppCompatActivity {
 
 	Statistics stats;
@@ -25,6 +30,7 @@ public class StatsActivity extends AppCompatActivity {
 	QuizHistoryAdapter quizHistoryAdapter;
 	DatabaseHandler databaseHandler;
 	TextView averageDurationTxtView, averageScoreTxtView, totalQuizzesTxtView;
+	SharedPreferences sharedPref;
 
 //	Statistics s;
 	@Override
@@ -36,13 +42,16 @@ public class StatsActivity extends AppCompatActivity {
 		databaseHandler = new DatabaseHandler(this);
 		stats = databaseHandler.getStatistics();
 
+		sharedPref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+
 		averageDurationTxtView = findViewById(R.id.averageDurationTxtView);
 		averageScoreTxtView = findViewById(R.id.averageScoreTxtView);
 		totalQuizzesTxtView = findViewById(R.id.totalQuizzesTxtView);
 
-		averageDurationTxtView.setText("" + stats.getAverageQuizTime());
-		averageScoreTxtView.setText("" + stats.getAverageQuizPercentage());
-		totalQuizzesTxtView.setText("" + stats.getTotalQuizzesTaken());
+		averageDurationTxtView.setText(stats.getAverageQuizTime() + " seconds");
+		averageScoreTxtView.setText(stats.getAverageQuizPercentage() + "%");
+		totalQuizzesTxtView.setText(stats.getTotalQuizzesTaken() + "");
 
 //		Quiz q = new Quiz();
 //		q.setQuizID(1);
@@ -69,8 +78,13 @@ public class StatsActivity extends AppCompatActivity {
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 	}
 
-	public void takeQuiz(View view) {
+	public void takeQuiz(int quizID) {
 
 
+		Intent intent = new Intent(this, TakeQuizActivity.class);
+		intent.putExtra("QUIZ_ID", quizID);
+		intent.putExtra("TIMER_COUNT", Integer.parseInt(sharedPref.getString("timer_count", "0")));
+		startActivityForResult(intent, TAKE_QUIZ);
 	}
+
 }

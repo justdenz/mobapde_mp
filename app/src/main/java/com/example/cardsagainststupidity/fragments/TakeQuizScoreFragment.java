@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.R;
+import com.example.cardsagainststupidity.TakeQuizActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.text.DecimalFormat;
@@ -59,10 +60,16 @@ public class TakeQuizScoreFragment extends Fragment {
         btnFinish = view.findViewById(R.id.btnFinish);
         btnRetake = view.findViewById(R.id.btnRetake);
 
-        DecimalFormat df = new DecimalFormat("#.##");
-        txtScore.setText(df.format(record.getScorePercentage()) + "%");
+        txtScore.setText(record.getScorePercentage() + "%");
         txtQuizTitle.setText(record.getQuiz().getTitle());
         txtDuration.setText("Duration: " + record.getDuration() + " seconds");
+
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TakeQuizActivity) getContext()).exitQuiz();
+            }
+        });
 
         return view;
     }

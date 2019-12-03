@@ -30,7 +30,7 @@ public class CardInfoActivity extends AppCompatActivity {
 
 	Quiz quiz;
 	DatabaseHandler databaseHandler;
-	TextView titleTxtView, subjectTxtView, descriptionTxtView, dateTxtView, nFlashcardsTxtView;
+	TextView titleTxtView, subjectTxtView, descriptionTxtView, dateTxtView, nFlashcardsTxtView, highscoreTxtView;
 	Button editBtn, takeQuizBtn;
 	SimpleDateFormat formatter;
 	EditText secondsInput;
@@ -58,9 +58,10 @@ public class CardInfoActivity extends AppCompatActivity {
 		dateTxtView = findViewById(R.id.dateTxtView);
 		editBtn = findViewById(R.id.editBtn);
 		takeQuizBtn = findViewById(R.id.takeQuizBtn);
+		highscoreTxtView = findViewById(R.id.highscoreTxtView);
 		secondsInput = findViewById(R.id.secondsInput);
 
-		//float highscore = databaseHandler.getHighscoreByQuizID(id);
+		float highscore = databaseHandler.getHighscoreByQuizID(id);
 
 		formatter = new SimpleDateFormat("MMMM dd, yyyy");
 
@@ -68,6 +69,7 @@ public class CardInfoActivity extends AppCompatActivity {
 		subjectTxtView.setText(quiz.getSubject());
 		descriptionTxtView.setText(quiz.getDescription());
 		dateTxtView.setText(formatter.format(quiz.getDate_created()));
+		highscoreTxtView.setText(highscore + "%");
 		nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
 		secondsInput.setText(sharedPref.getString("timer_count", "0"));
 

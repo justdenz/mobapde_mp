@@ -185,15 +185,15 @@
                 app:srcCompat="@drawable/ic_timer" />
 
             <TextView
-                android:id="@+id/mark"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/highscoreTxtView"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:layout_below="@+id/descriptionTxtView"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentEnd="false"
-                android:layout_marginStart="122dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="122dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="112dp"
                 android:background="@drawable/rounded_textview"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"

@@ -45,10 +45,9 @@ public class Statistics {
 		return totalPercent / history.size();
 	}
 
-	public float getAverageQuizTime() {
+	public int getAverageQuizTime() {
 
-		float totalTime = 0;
-
+		int totalTime = 0;
 
 
 		for (QuizRecord r : history) {
