@@ -3,7 +3,10 @@ package com.example.cardsagainststupidity.fragments;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cardsagainststupidity.CreateQuizActivity;
+import com.example.cardsagainststupidity.MainActivity;
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.R;
@@ -126,21 +130,43 @@ public class CreateQuizCardsFragment extends Fragment {
     }
 
     public void removeCard(){
-        flashcards.remove(CURRENT_CARD-1); // removes the current card
-        if(CURRENT_CARD == 1) {
-            CURRENT_CARD += 1;
-            backCardBtn.setVisibility(View.INVISIBLE);
-        }
-        else if (CURRENT_CARD == 2){
-            CURRENT_CARD -= 1;
-            backCardBtn.setVisibility(View.INVISIBLE);
-        } else{
-            CURRENT_CARD -=1;
-            backCardBtn.setVisibility(View.VISIBLE);
-        }
-        nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
-        questionInput.setText(flashcards.get(CURRENT_CARD-1).getQuestion());
-        answerInput.setText(flashcards.get(CURRENT_CARD-1).getAnswer());
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        builder.setTitle("Remove Card");
+        builder.setMessage("Are you sure you want to remove this card? This cannot be reverted.");
+        builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                flashcards.remove(CURRENT_CARD-1); // removes the current card
+                if(CURRENT_CARD == 1) {
+                    CURRENT_CARD += 1;
+                    backCardBtn.setVisibility(View.INVISIBLE);
+                }
+                else if (CURRENT_CARD == 2){
+                    CURRENT_CARD -= 1;
+                    backCardBtn.setVisibility(View.INVISIBLE);
+                } else{
+                    CURRENT_CARD -=1;
+                    backCardBtn.setVisibility(View.VISIBLE);
+                }
+                nthFlashCard.setText("Flashcard " + Integer.toString(CURRENT_CARD) + "/" + Integer.toString(flashcards.size()));
+                questionInput.setText(flashcards.get(CURRENT_CARD-1).getQuestion());
+                answerInput.setText(flashcards.get(CURRENT_CARD-1).getAnswer());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorDelete));
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorCancel));
+
     }
 
     public void addCard(){

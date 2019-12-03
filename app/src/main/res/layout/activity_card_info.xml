@@ -139,7 +139,7 @@
             app:backgroundTint="#FFFFFF"
             app:icon="@drawable/ic_delete"
             app:iconPadding="0dp"
-            app:iconTint="#000000" />
+            app:iconTint="#555555" />
 
         <EditText
             android:id="@+id/secondsInput"
