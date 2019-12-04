@@ -1,4 +1,4 @@
-package com.example.cardsagainststupidity.Model;
+package com.example.cardsagainststupidity.util;
 
 /*
 
@@ -14,7 +14,6 @@ http://programondaspot.blogspot.com/2015/07/shake-listener-and-shake-detection-o
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 import android.widget.Toast;

@@ -1,11 +1,7 @@
 package com.example.cardsagainststupidity.fragments;
 
 
-import android.animation.ObjectAnimator;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceManager;
 
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
@@ -23,24 +18,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
-import com.example.cardsagainststupidity.Model.ShakeListener;
-import com.example.cardsagainststupidity.Model.Stopwatch;
+import com.example.cardsagainststupidity.util.OnSwipeTouchListener;
+import com.example.cardsagainststupidity.util.ShakeListener;
+import com.example.cardsagainststupidity.util.Stopwatch;
 import com.example.cardsagainststupidity.R;
 import com.example.cardsagainststupidity.TakeQuizActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import static android.content.Context.VIBRATOR_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +50,7 @@ public class TakeQuizCardsFragment extends Fragment {
     TextView txtFlashcardNum, txtQuestion, txtAnswer;
     ImageButton backBtn;
     MaterialButton btnGuessed, btnCorrect, btnSkip;
+    LinearLayout take_quiz_cards_fragment;
 
     private ArrayList<Flashcard> deck;
     private ArrayList<Flashcard> skipped;
@@ -99,8 +95,7 @@ public class TakeQuizCardsFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         txtQuestion = view.findViewById(R.id.txtQuestion);
         txtAnswer = view.findViewById(R.id.txtAnswer);
-
-
+        take_quiz_cards_fragment = view.findViewById(R.id.take_quiz_cards_fragment);
 
         initListeners();
         initQuiz();
@@ -112,24 +107,14 @@ public class TakeQuizCardsFragment extends Fragment {
         btnCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (game_proper) {
-                    nCorrect++;
-                    setNextQuestion();
-
-
-                }
-
+                pickCorrect();
             }
         });
 
         btnGuessed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (game_proper) {
-
-                    setNextQuestion();
-                }
+             pickWrong();
             }
 
         });
@@ -137,17 +122,7 @@ public class TakeQuizCardsFragment extends Fragment {
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (game_proper) {
-
-                    if (current < deck.size()) {
-                        skipped.add(currentFlashcard);
-                        setNextQuestion();
-                    }
-
-
-                    // if user skips, it will be added to the skipped array
-
-                }
+                pickSkip();
             }
         });
 
@@ -156,30 +131,65 @@ public class TakeQuizCardsFragment extends Fragment {
             mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
                 public void onShake()
                 {
-
-                    if (game_proper) {
-
-                        if (current < deck.size()) {
-                            Toast.makeText(getContext(), "Skipped" , Toast.LENGTH_LONG).show();
-                            goVibrate();
-                            skipped.add(currentFlashcard);
-                            setNextQuestion();
-                        }
-                        // if user skips, it will be added to the skipped array
-
+                    if (pickSkip()) {
+                        Toast.makeText(getContext(), "Skipped" , Toast.LENGTH_LONG).show();
+                        goVibrate();
                     }
-
+                    // if user skips, it will be added to the skipped array
                 }
             });
         }
 
+        if (allowSwipe) {
+            take_quiz_cards_fragment.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
 
+                public void onSwipeRight() {
+                    if (pickWrong()) {
+                        Toast.makeText(getContext(), "I guessed", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
+                public void onSwipeLeft() {
+                    if (pickCorrect()) {
+                        Toast.makeText(getContext(), "I knew it", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
+    }
 
+    private boolean pickCorrect() {
 
+        if (game_proper) {
+            nCorrect++;
+            setNextQuestion();
+            return true;
+        }
 
+        return false;
+    }
 
+    private boolean pickWrong() {
+
+        if (game_proper) {
+            setNextQuestion();
+            return true;
+        }
+
+        return false;
+
+    }
+
+    private boolean pickSkip(){
+
+        if (game_proper) {
+            skipped.add(currentFlashcard);
+            setNextQuestion();
+            return true;
+        }
+
+        return false;
     }
 
     private void initQuiz() {
@@ -231,7 +241,7 @@ public class TakeQuizCardsFragment extends Fragment {
 
             btnSkip.setEnabled(false);
             btnSkip.setText("");
-            mShaker.setOnShakeListener(null);
+
 
             currentFlashcard = skipped.get(0);
             skipped.remove(currentFlashcard);

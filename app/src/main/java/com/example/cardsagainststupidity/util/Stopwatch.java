@@ -1,4 +1,4 @@
-package com.example.cardsagainststupidity.Model;
+package com.example.cardsagainststupidity.util;
 
 /*
 Copyright (c) 2005, Corey Goldberg
