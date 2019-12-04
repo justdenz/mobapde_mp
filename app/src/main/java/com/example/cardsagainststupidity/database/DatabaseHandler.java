@@ -175,9 +175,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return quiz;
 	}
 
-	public int updateQuiz(Quiz q) {
-
-		SQLiteDatabase db = this.getWritableDatabase();
+	public void updateQuiz(Quiz q) {
 
 		ContentValues values = new ContentValues();
 
@@ -185,12 +183,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(Util.QUIZ_KEY_SUBJECT, q.getSubject());
 		values.put(Util.QUIZ_KEY_DESCRIPTION, q.getDescription());
 
-		updateFlashcards(q.getDeck(), q.getQuizID());
 
-		//update the row
-		//update(tablename, values, where id = 43)
-		return db.update(Util.QUIZ_TABLE_NAME, values, Util.QUIZ_KEY_ID + "= ?",
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		db.update(Util.QUIZ_TABLE_NAME, values, Util.QUIZ_KEY_ID + "= ?",
 				new String[]{String.valueOf(q.getQuizID())});
+
+		db.close();
+
+		deleteFlashcards(q.getQuizID());
+		addFlashcards(q.getDeck(), q.getQuizID());
 	}
 
 	public void addQuiz(Quiz q){
@@ -286,27 +289,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-	private void updateFlashcards(ArrayList<Flashcard> deck, int quizID) {
-
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		for (Flashcard f : deck) {
-			ContentValues values = new ContentValues();
-
-			values.put(Util.QUIZ_KEY_ID, quizID);
-			values.put(Util.FLASHCARD_KEY_QUESTION, f.getQuestion());
-			values.put(Util.FLASHCARD_KEY_ANSWER, f.getAnswer());
-
-
-			db.update(Util.FLASHCARD_TABLE_NAME, values, Util.FLASHCARD_KEY_ID + "= ?",
-					new String[]{String.valueOf(f.getFlashcardID())});
-		}
-	}
-
 	private void deleteFlashcards (int quizID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
-		db.delete(Util.RECORD_TABLE_NAME, Util.QUIZ_KEY_ID + "=?",
+		db.delete(Util.FLASHCARD_TABLE_NAME, Util.QUIZ_KEY_ID + "=?",
 				new String[]{String.valueOf(quizID)});
 
 		db.close();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray"
@@ -184,45 +185,60 @@
                 android:layout_toStartOf="@+id/secondsInput"
                 app:srcCompat="@drawable/ic_timer" />
 
-            <TextView
-                android:id="@+id/scorePercentageTxtView"
-                android:layout_width="84dp"
-                android:layout_height="49dp"
-                android:layout_below="@+id/descriptionTxtView"
-                android:layout_alignStart="@+id/circularProgressBar"
-                android:layout_alignEnd="@+id/circularProgressBar"
-                android:layout_alignBottom="@+id/circularProgressBar"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="42dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="42dp"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="100.0%"
-                android:textAlignment="textStart"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                android:id="@+id/circularProgressBar"
-                android:layout_width="133dp"
-                android:layout_height="137dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/descriptionTxtView"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="107dp"
-                android:layout_marginTop="-2dp"
-                android:layout_marginEnd="106dp"
-                app:cpb_background_progressbar_color="#E6E5E5"
-                app:cpb_background_progressbar_width="5dp"
-                app:cpb_progress="0"
-                app:cpb_progress_direction="to_right"
-                app:cpb_progress_max="100"
-                app:cpb_progressbar_color="#000000"
-                app:cpb_progressbar_width="10dp"
-                app:cpb_round_border="false" />
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="-1dp"
+                android:layout_marginBottom="10dp">
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar"
+                    android:layout_width="150dp"
+                    android:layout_height="151dp"
+                    android:layout_below="@+id/descriptionTxtView"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:cpb_background_progressbar_color="#E6E5E5"
+                    app:cpb_background_progressbar_width="5dp"
+                    app:cpb_progress="0"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progress_max="100"
+                    app:cpb_progressbar_color="#000000"
+                    app:cpb_progressbar_width="10dp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/scorePercentageTxtView"
+                    android:layout_width="95dp"
+                    android:layout_height="52dp"
+
+                    android:layout_alignStart="@+id/circularProgressBar"
+                    android:layout_alignEnd="@+id/circularProgressBar"
+                    android:layout_alignBottom="@+id/circularProgressBar"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="100.0%"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+                    app:layout_constraintVertical_bias="0.493" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </RelativeLayout>

@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="Timer">
 
@@ -23,6 +24,7 @@
             app:defaultValue="5sec"
             app:entries="@array/timer_entries"
             app:entryValues="@array/timer_values"
+            app:icon="@drawable/ic_timer"
             app:key="timer_count"
             app:title="Default Timer Seconds"
             app:useSimpleSummaryProvider="true" />
@@ -32,11 +34,14 @@
     <PreferenceCategory app:title="Shake and Swipe Gestures">
 
         <SwitchPreferenceCompat
+            app:icon="@drawable/ic_vibration_24px"
             app:key="shake"
-            app:title="Enable Shake to Skip"
-            app:summary="You can skip a question by shaking your device. Skipped questions will appear again before the quiz ends"/>
+            app:summary="You can skip a question by shaking your device. Skipped questions will appear again before the quiz ends"
+            app:title="Enable Shake to Skip" />
 
         <SwitchPreferenceCompat
+            app:icon="@drawable/ic_swipe"
+            app:iconSpaceReserved="false"
             app:key="swipe"
             app:summaryOff="Only proceed to next question when buttons are pressed. Swiping is disabled"
             app:summaryOn="Swiping left will select 'I Guessed' while swiping right selects 'I Knew it'"
