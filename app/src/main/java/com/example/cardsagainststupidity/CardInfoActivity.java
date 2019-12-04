@@ -19,6 +19,7 @@ import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
@@ -76,7 +77,9 @@ public class CardInfoActivity extends AppCompatActivity {
 		dateTxtView.setText(formatter.format(quiz.getDate_created()));
 		nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
 		secondsInput.setText(sharedPref.getString("timer_count", "0"));
-		scorePercentageTxtView.setText(highscore + "%");
+
+		DecimalFormat df = new DecimalFormat("#.##");
+		scorePercentageTxtView.setText(df.format(highscore) + "%");
 
 		circularProgressBar.setProgressWithAnimation(highscore, (long)1000);
 		circularProgressBar.setProgressMax(100);
@@ -93,7 +96,7 @@ public class CardInfoActivity extends AppCompatActivity {
 				quiz = databaseHandler.getQuiz(quiz.getQuizID());
 
 
-				//float highscore = databaseHandler.getHighscoreByQuizID(id);
+				float highscore = databaseHandler.getHighscoreByQuizID(quiz.getQuizID());
 
 				formatter = new SimpleDateFormat("MMMM dd, yyyy");
 
@@ -102,14 +105,22 @@ public class CardInfoActivity extends AppCompatActivity {
 				descriptionTxtView.setText(quiz.getDescription());
 				dateTxtView.setText(formatter.format(quiz.getDate_created()));
 				nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
+				scorePercentageTxtView.setText(highscore + "%");
+
+				circularProgressBar.setProgressWithAnimation(highscore, (long)1000);
+				circularProgressBar.setProgressMax(100);
 
 			}
 		}
 		else if (requestCode == TAKE_QUIZ) {
 			if (resultCode == RESULT_OK) {
-				quiz = databaseHandler.getQuiz(quiz.getQuizID());
+				float highscore = databaseHandler.getHighscoreByQuizID(quiz.getQuizID());
 
 
+				scorePercentageTxtView.setText(String.format("%.01f", highscore) + "%");
+
+				circularProgressBar.setProgressWithAnimation(highscore, (long)1000);
+				circularProgressBar.setProgressMax(100);
 			}
 		}
 	}

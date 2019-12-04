@@ -20,6 +20,7 @@ import com.example.cardsagainststupidity.R;
 import com.example.cardsagainststupidity.StatsActivity;
 import com.example.cardsagainststupidity.TakeQuizActivity;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -47,7 +48,9 @@ private ArrayList<QuizRecord> records;
 	public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 		holder.setHolderQuizID(records.get(position).getQuiz().getQuizID());
 		holder.titleTxtView.setText(records.get(position).getQuiz().getTitle());
-		holder.scorePercentageTxtView.setText(records.get(position).getScorePercentage() + "%");
+
+		DecimalFormat df = new DecimalFormat("#.##");
+		holder.scorePercentageTxtView.setText(df.format(records.get(position).getScorePercentage()) + "%");
 
 		formatter = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss");
 

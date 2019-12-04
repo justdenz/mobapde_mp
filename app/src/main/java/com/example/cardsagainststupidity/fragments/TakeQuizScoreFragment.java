@@ -65,7 +65,8 @@ public class TakeQuizScoreFragment extends Fragment {
         btnRetake = view.findViewById(R.id.btnRetake);
         circularProgressBar = view.findViewById(R.id.circularProgressBar);
 
-        txtScore.setText(record.getScorePercentage() + "%");
+        DecimalFormat df = new DecimalFormat("#.##");
+        txtScore.setText(df.format(record.getScorePercentage()) + "%");
 
         circularProgressBar.setProgressWithAnimation(record.getScorePercentage(), (long)1000);
         circularProgressBar.setProgressMax(100);
@@ -81,7 +82,7 @@ public class TakeQuizScoreFragment extends Fragment {
             txtHighscore.setText("Nice! You tied your old highscore!");
         }
         else {
-            txtHighscore.setText("Your current highscore is " +oldRecord + "%");
+            txtHighscore.setText("Your current highscore is " +df.format(oldRecord) + "%");
         }
 
 

@@ -18,6 +18,7 @@ import com.example.cardsagainststupidity.adapter.QuizCardAdapter;
 import com.example.cardsagainststupidity.adapter.QuizHistoryAdapter;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -50,7 +51,9 @@ public class StatsActivity extends AppCompatActivity {
 		totalQuizzesTxtView = findViewById(R.id.totalQuizzesTxtView);
 
 		averageDurationTxtView.setText(stats.getAverageQuizTime() + " seconds");
-		averageScoreTxtView.setText(stats.getAverageQuizPercentage() + "%");
+
+		DecimalFormat df = new DecimalFormat("#.##");
+		averageScoreTxtView.setText(df.format(stats.getAverageQuizPercentage()) + "%");
 		totalQuizzesTxtView.setText(stats.getTotalQuizzesTaken() + "");
 
 //		Quiz q = new Quiz();

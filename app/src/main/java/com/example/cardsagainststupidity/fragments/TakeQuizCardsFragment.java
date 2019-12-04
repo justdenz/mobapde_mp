@@ -97,6 +97,7 @@ public class TakeQuizCardsFragment extends Fragment {
         txtAnswer = view.findViewById(R.id.txtAnswer);
         take_quiz_cards_fragment = view.findViewById(R.id.take_quiz_cards_fragment);
 
+
         initListeners();
         initQuiz();
 
@@ -198,7 +199,9 @@ public class TakeQuizCardsFragment extends Fragment {
         current = -1;
         this.skipped = new ArrayList<>();
         stopwatch = new Stopwatch();
-
+        btnGuessed.setVisibility(View.INVISIBLE);
+        btnCorrect.setVisibility(View.INVISIBLE);
+        btnSkip.setVisibility(View.INVISIBLE);
         startTimer(WARM_UP_SECONDS);
     }
 
@@ -239,9 +242,7 @@ public class TakeQuizCardsFragment extends Fragment {
                 timer.cancel();
             }
 
-            btnSkip.setEnabled(false);
-            btnSkip.setText("");
-
+            btnSkip.setVisibility(View.INVISIBLE);
 
             currentFlashcard = skipped.get(0);
             skipped.remove(currentFlashcard);
@@ -305,6 +306,9 @@ public class TakeQuizCardsFragment extends Fragment {
             else {
                 game_proper = true;
                 startQuiz();
+                btnGuessed.setVisibility(View.VISIBLE);
+                btnCorrect.setVisibility(View.VISIBLE);
+                btnSkip.setVisibility(View.VISIBLE);
             }
             progressBar.setProgress(0);
         }
