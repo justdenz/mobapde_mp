@@ -96,6 +96,8 @@ public class TakeQuizActivity extends AppCompatActivity {
 
 
 	public void exitQuiz() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
         finish();
 	}
 

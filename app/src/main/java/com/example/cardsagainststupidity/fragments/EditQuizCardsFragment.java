@@ -123,7 +123,14 @@ public class EditQuizCardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 updateCurrentCard();
-                ((EditQuizActivity) getActivity()).finishEditQuiz(flashcards);
+
+                if (isComplete()) {
+                    ((EditQuizActivity) getActivity()).finishEditQuiz(flashcards);
+                }
+                else {
+                    Toast.makeText(((EditQuizActivity) getActivity()), "Please fill up all the flashcards.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -169,6 +176,19 @@ public class EditQuizCardsFragment extends Fragment {
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorDelete));
         alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorCancel));
 
+    }
+
+    private boolean isComplete () {
+
+
+        for (Flashcard f : flashcards) {
+
+            if (f.getQuestion().equals("") || f.getAnswer().equals("")) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void addCard(){
