@@ -35,30 +35,58 @@
                 android:textSize="27sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtScore"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_below="@id/txtHighscore"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="122dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="122dp"
-                android:background="@drawable/rounded_textview"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="center"
-                android:text="100%"
-                android:textColor="#000000"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar"
+                    android:layout_width="133dp"
+                    android:layout_height="137dp"
+                    android:layout_below="@+id/descriptionTxtView"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    app:cpb_background_progressbar_color="#E6E5E5"
+                    app:cpb_background_progressbar_width="5dp"
+                    app:cpb_progress="0"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progress_max="100"
+                    app:cpb_progressbar_color="#000000"
+                    app:cpb_progressbar_width="10dp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtScore"
+                    android:layout_width="95dp"
+                    android:layout_height="52dp"
+                    android:layout_below="@+id/descriptionTxtView"
+                    android:layout_alignStart="@+id/circularProgressBar"
+                    android:layout_alignEnd="@+id/circularProgressBar"
+                    android:layout_alignBottom="@+id/circularProgressBar"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="100.0%"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/txtHighscore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10pt"
-                android:layout_marginBottom="10pt"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:text="Good Job! You set a new highscore!"
@@ -69,7 +97,8 @@
                 android:id="@+id/txtDuration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:includeFontPadding="false"

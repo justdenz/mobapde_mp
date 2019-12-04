@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.Model.QuizRecord;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
+import com.example.cardsagainststupidity.fragments.CreateQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.TakeQuizCardsFragment;
 import com.example.cardsagainststupidity.fragments.TakeQuizScoreFragment;
 
@@ -34,6 +35,7 @@ public class TakeQuizActivity extends AppCompatActivity {
     private int timerCount;
     private Quiz quiz;
     private QuizRecord record;
+    private float oldRecord;
 
 
 
@@ -48,15 +50,26 @@ public class TakeQuizActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         quiz = databaseHandler.getQuiz(bundle.getInt("QUIZ_ID"));
         timerCount = bundle.getInt("TIMER_COUNT");
+        oldRecord = bundle.getFloat("OLD_RECORD");
 
+        startGame();
+    }
 
-
+    public void startGame() {
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
+
+
+        if(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_INFO_SCORE") != null) {
+            fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_INFO_SCORE"));
+        }
+
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         fragmentTransaction.add(R.id.frame_container, new TakeQuizCardsFragment(quiz, timerCount), "TAKE_QUIZ_CARDS");
         fragmentTransaction.commit();
+
     }
 
 
@@ -71,9 +84,9 @@ public class TakeQuizActivity extends AppCompatActivity {
     public void endGame() {
 
         databaseHandler.addRecord(this.record);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.detach(getSupportFragmentManager().findFragmentByTag("TAKE_QUIZ_CARDS"));
-        fragmentTransaction.add(R.id.frame_container, new TakeQuizScoreFragment(this.record), "TAKE_QUIZ_INFO_SCORE");
+        fragmentTransaction.add(R.id.frame_container, new TakeQuizScoreFragment(this.record, oldRecord), "TAKE_QUIZ_INFO_SCORE");
         fragmentTransaction.commit();
     }
 
@@ -82,9 +95,9 @@ public class TakeQuizActivity extends AppCompatActivity {
         finish();
 	}
 
-    public void retakeQuiz(View view) {
+	public void setOldRecord (float record) {
+        this.oldRecord = record;
     }
-
 
 
 }

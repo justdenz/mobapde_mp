@@ -17,7 +17,7 @@
             <item
                 android:id="@+id/sort_by_date"
                 android:onClick="sortBy"
-                android:title="Date" />
+                android:title="Date Created" />
 
             <item
                 android:id="@+id/sort_by_title"

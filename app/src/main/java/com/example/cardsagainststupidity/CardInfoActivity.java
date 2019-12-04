@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.cardsagainststupidity.Model.Quiz;
 import com.example.cardsagainststupidity.database.DatabaseHandler;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -30,11 +31,12 @@ public class CardInfoActivity extends AppCompatActivity {
 
 	Quiz quiz;
 	DatabaseHandler databaseHandler;
-	TextView titleTxtView, subjectTxtView, descriptionTxtView, dateTxtView, nFlashcardsTxtView, highscoreTxtView;
+	TextView titleTxtView, subjectTxtView, scorePercentageTxtView,descriptionTxtView, dateTxtView, nFlashcardsTxtView;
 	Button editBtn, takeQuizBtn;
 	SimpleDateFormat formatter;
 	EditText secondsInput;
 	SharedPreferences sharedPref;
+	CircularProgressBar circularProgressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,10 @@ public class CardInfoActivity extends AppCompatActivity {
 		dateTxtView = findViewById(R.id.dateTxtView);
 		editBtn = findViewById(R.id.editBtn);
 		takeQuizBtn = findViewById(R.id.takeQuizBtn);
-		highscoreTxtView = findViewById(R.id.highscoreTxtView);
+		circularProgressBar = findViewById(R.id.circularProgressBar);
+		scorePercentageTxtView = findViewById(R.id.scorePercentageTxtView);
+
+
 		secondsInput = findViewById(R.id.secondsInput);
 
 		float highscore = databaseHandler.getHighscoreByQuizID(id);
@@ -69,9 +74,13 @@ public class CardInfoActivity extends AppCompatActivity {
 		subjectTxtView.setText(quiz.getSubject());
 		descriptionTxtView.setText(quiz.getDescription());
 		dateTxtView.setText(formatter.format(quiz.getDate_created()));
-		highscoreTxtView.setText(highscore + "%");
 		nFlashcardsTxtView.setText(quiz.getDeck().size() + " Flashcards");
 		secondsInput.setText(sharedPref.getString("timer_count", "0"));
+		scorePercentageTxtView.setText(highscore + "%");
+
+		circularProgressBar.setProgressWithAnimation(highscore, (long)1000);
+		circularProgressBar.setProgressMax(100);
+
 
 	}
 
@@ -142,6 +151,8 @@ public class CardInfoActivity extends AppCompatActivity {
 
 	public void takeQuiz(View view) {
 
+		float oldRecord = databaseHandler.getHighscoreByQuizID(quiz.getQuizID());
+
 		int timer;
 
 		if (secondsInput.getText().toString().equals("")) {
@@ -154,6 +165,7 @@ public class CardInfoActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, TakeQuizActivity.class);
 		intent.putExtra("QUIZ_ID", quiz.getQuizID());
 		intent.putExtra("TIMER_COUNT", timer);
+		intent.putExtra("OLD_RECORD", oldRecord);
 		startActivityForResult(intent, TAKE_QUIZ);
 	}
 }

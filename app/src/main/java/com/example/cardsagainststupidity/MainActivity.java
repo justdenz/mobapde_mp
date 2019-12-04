@@ -190,10 +190,12 @@ public class MainActivity extends AppCompatActivity {
 
 	public void takeQuiz(int quizID) {
 
+        float oldRecord = databaseHandler.getHighscoreByQuizID(quizID);
 
         Intent intent = new Intent(this, TakeQuizActivity.class);
         intent.putExtra("QUIZ_ID", quizID);
         intent.putExtra("TIMER_COUNT", Integer.parseInt(sharedPref.getString("timer_count", "0")));
+        intent.putExtra("OLD_RECORD", oldRecord);
         startActivityForResult(intent, TAKE_QUIZ);
 	}
 }
