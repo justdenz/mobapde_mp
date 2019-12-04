@@ -51,4 +51,6 @@
         <activity android:name=".fragments.TakeQuizScoreFragment" />
     </application>
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
 </manifest>

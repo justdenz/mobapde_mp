@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
+import com.example.cardsagainststupidity.Model.ShakeListener;
 import com.example.cardsagainststupidity.Model.Stopwatch;
 import com.example.cardsagainststupidity.R;
 import com.example.cardsagainststupidity.TakeQuizActivity;
@@ -32,6 +38,9 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static android.content.Context.VIBRATOR_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,12 +67,16 @@ public class TakeQuizCardsFragment extends Fragment {
     private int nCorrect;
     private Stopwatch stopwatch;
     private Flashcard currentFlashcard;
+    private ShakeListener mShaker;
+    private boolean allowShake, allowSwipe;
 
 
 
-    public TakeQuizCardsFragment(Quiz quiz, int timerCount) {
+    public TakeQuizCardsFragment(Quiz quiz, int timerCount, boolean allowSwipe, boolean allowShake) {
         this.deck = quiz.getDeck();
         this.timerCount = timerCount;
+        this.allowShake = allowShake;
+        this.allowSwipe = allowSwipe;
         // Required empty public constructor
     }
 
@@ -87,6 +100,15 @@ public class TakeQuizCardsFragment extends Fragment {
         txtQuestion = view.findViewById(R.id.txtQuestion);
         txtAnswer = view.findViewById(R.id.txtAnswer);
 
+
+
+        initListeners();
+        initQuiz();
+
+        return view;
+    }
+
+    private void initListeners() {
         btnCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,9 +143,7 @@ public class TakeQuizCardsFragment extends Fragment {
                         skipped.add(currentFlashcard);
                         setNextQuestion();
                     }
-                    else {
-                        txtFlashcardNum.setText("You cannot skip twice!");
-                    }
+
 
                     // if user skips, it will be added to the skipped array
 
@@ -131,10 +151,35 @@ public class TakeQuizCardsFragment extends Fragment {
             }
         });
 
+        if (allowShake) {
+            mShaker = new ShakeListener((TakeQuizActivity) getContext());
+            mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
+                public void onShake()
+                {
 
-        initQuiz();
+                    if (game_proper) {
 
-        return view;
+                        if (current < deck.size()) {
+                            Toast.makeText(getContext(), "Skipped" , Toast.LENGTH_LONG).show();
+                            goVibrate();
+                            skipped.add(currentFlashcard);
+                            setNextQuestion();
+                        }
+                        // if user skips, it will be added to the skipped array
+
+                    }
+
+                }
+            });
+        }
+
+
+
+
+
+
+
+
     }
 
     private void initQuiz() {
@@ -143,6 +188,7 @@ public class TakeQuizCardsFragment extends Fragment {
         current = -1;
         this.skipped = new ArrayList<>();
         stopwatch = new Stopwatch();
+
         startTimer(WARM_UP_SECONDS);
     }
 
@@ -150,6 +196,16 @@ public class TakeQuizCardsFragment extends Fragment {
         Collections.shuffle(deck);
         setNextQuestion();
     }
+
+    private void goVibrate() {
+        if (Build.VERSION.SDK_INT >= 26) {
+
+            ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(150);
+        }
+    }
+
 
     private void setNextQuestion () {
 
@@ -172,6 +228,10 @@ public class TakeQuizCardsFragment extends Fragment {
             if (timer != null) {
                 timer.cancel();
             }
+
+            btnSkip.setEnabled(false);
+            btnSkip.setText("");
+            mShaker.setOnShakeListener(null);
 
             currentFlashcard = skipped.get(0);
             skipped.remove(currentFlashcard);
@@ -206,6 +266,8 @@ public class TakeQuizCardsFragment extends Fragment {
     }
 
 
+
+
     public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer (long millisInFuture, long countDownInterval) {
@@ -238,5 +300,7 @@ public class TakeQuizCardsFragment extends Fragment {
         }
 
     }
+
+
 
 }

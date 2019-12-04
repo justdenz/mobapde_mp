@@ -36,6 +36,7 @@ public class TakeQuizActivity extends AppCompatActivity {
     private Quiz quiz;
     private QuizRecord record;
     private float oldRecord;
+    SharedPreferences sharedPref;
 
 
 
@@ -52,6 +53,9 @@ public class TakeQuizActivity extends AppCompatActivity {
         timerCount = bundle.getInt("TIMER_COUNT");
         oldRecord = bundle.getFloat("OLD_RECORD");
 
+        sharedPref = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
         startGame();
     }
 
@@ -67,7 +71,7 @@ public class TakeQuizActivity extends AppCompatActivity {
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        fragmentTransaction.add(R.id.frame_container, new TakeQuizCardsFragment(quiz, timerCount), "TAKE_QUIZ_CARDS");
+        fragmentTransaction.add(R.id.frame_container, new TakeQuizCardsFragment(quiz, timerCount, sharedPref.getBoolean("swipe", false), sharedPref.getBoolean("shake", false)), "TAKE_QUIZ_CARDS");
         fragmentTransaction.commit();
 
     }
