@@ -6,6 +6,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 
 import com.example.cardsagainststupidity.Model.Flashcard;
 import com.example.cardsagainststupidity.Model.Quiz;
@@ -27,6 +31,7 @@ public class EditQuizActivity extends AppCompatActivity {
 	private FragmentManager fragmentManager;
 	private FragmentTransaction fragmentTransaction;
 	private DatabaseHandler databaseHandler;
+	private LinearLayout linearLayout;
 	Bundle bundle;
 	private Quiz quiz;
 
@@ -44,6 +49,17 @@ public class EditQuizActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		fragmentTransaction.add(R.id.frame_container, new EditQuizInfoFragment(quiz), "EDIT_QUIZ_INFO");
 		fragmentTransaction.commit();
+
+		linearLayout = findViewById(R.id.linear_layout);
+
+		linearLayout.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+				return true;
+			}
+		});
 	}
 
 	public void goNext() {
