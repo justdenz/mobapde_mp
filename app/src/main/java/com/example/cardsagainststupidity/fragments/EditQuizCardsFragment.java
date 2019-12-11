@@ -78,7 +78,11 @@ public class EditQuizCardsFragment extends Fragment {
 
 
         nextCardBtn = view.findViewById(R.id.nextCardBtn);
-        nextCardBtn.setBackgroundResource(R.drawable.ic_add_circular_outlined_button);
+        if(flashcards.size() == 1) {
+            nextCardBtn.setBackgroundResource(R.drawable.ic_add_circular_outlined_button);
+        }else {
+            nextCardBtn.setBackgroundResource(R.drawable.ic_right);
+        }
         nextCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
